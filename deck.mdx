@@ -1,0 +1,104 @@
+import {
+  CodeSurfer,
+  CodeSurferColumns,
+  Step,
+} from "code-surfer";
+import { github, vsDark } from "@code-surfer/themes";
+
+export const theme = vsDark;
+
+# Oi 👋
+
+---
+
+<CodeSurfer>
+
+```js
+
+Was ist Functional Programming? 
+
+```
+
+```js
+Paradigma
+
+Erste Class Functions
+Pureness
+Immutability
+Composition
+und andere fancy Words 
+wie Referential Transparency (mehr dazu später)
+```
+
+```diff 1 subtitle="Eine Denkweise"
+```
+
+```diff 3 subtitle="Man kann Functions wie jeder anderen Data Type behandeln, in Arrays speichern, als Params oder Return Values weiterreichen, in Variablen speichern und dazu sind die in JS Callable"
+```
+
+```diff 4 subtitle="Nehmen ein Input und returne einen Output, verursachen keine Side Effects außerhalb der Funktion: negativ Bspl: Global Variables"
+```
+
+```diff 5 subtitle="Data Strukturen nicht mutieren, sondern kopieren und dann modifizieren"
+```
+
+```diff 6 subtitle="Data Strukturen nicht mutieren, sondern kopieren und dann modifizieren"
+```
+
+</CodeSurfer>
+
+---
+
+<CodeSurferColumns>
+
+<Step subtitle="1">
+
+```js file=./codesnipets/doubleitems.js
+```
+
+```js
+const doubleItems = arr => arr.map(v => v * 2)
+```
+
+</Step>
+
+<Step subtitle="Mutation">
+
+```js 4[18:22] file=./codesnipets/doubleitems.js
+```
+
+```js
+const doubleItems = arr => arr.map(v => v * 2)
+```
+
+</Step>
+
+<Step subtitle="Impure Variante">
+
+```js 1:7 file=./codesnipets/doubleItemsMutate.js
+```
+
+```js
+const doubleItems = arr => arr.map(v => v * 2)
+```
+
+</Step>
+
+<Step subtitle="Composition">
+
+```js 1:7 file=./codesnipets/doubleItems.js
+```
+
+```js
+const double = v => v * 2
+
+const doubleItems = arr => arr.map(double)
+```
+
+</Step>
+
+</CodeSurferColumns>
+
+---
+
+[FP Roadmap:](https://hub.packtpub.com/a-five-level-learning-roadmap-for-functional-programmers/)
