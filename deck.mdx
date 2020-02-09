@@ -162,6 +162,7 @@ const pizzaArr = [0,1,2,3]  // const ¯\_( ツ )_/¯
 slices.splice(0,2)
 pizzaArr // [🍕. 🍕, 🍕] 
 
+pop()
 push()
 shift()
 unshift()
@@ -180,6 +181,74 @@ reduce()
 ```
 
 </Step>
+
+<Step title="Array Methods">
+
+```js title='Impure'
+splice()
+pop()
+
+const menu = [🍕, 🍕, 🍕, 🍕, 🥦];
+
+push()
+shift()
+unshift()
+```
+
+```js
+slice() 🍕
+concat()
+filter()
+map()
+
+const menu = [🍕, 🍕, 🍕, 🍕, 🥦];
+const newMenu = menu.map()
+
+reduce()
+```
+
+</Step>
+
+<Step title="Array Methods">
+
+```js title='Impure'
+splice()
+pop()
+push()
+shift()
+unshift()
+```
+
+```js
+slice() 🍕
+concat()
+filter()
+map()
+reduce()
+```
+
+</Step>
+
+<Step title="Currying">
+
+```js
+
+const prepareFood = (a, b) => b => a(b)  
+
+```
+
+```js
+
+var prepareFood = function prepareFood(a, b) {
+  return function (b) {
+    return a(b)
+  }
+}
+
+```
+
+</Step>
+
 
 </CodeSurferColumns>
 
