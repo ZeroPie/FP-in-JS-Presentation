@@ -19,22 +19,19 @@ Was ist Functional Programming?
 
 ```
 
-```md title='Functional Programming'
+```markdown title='Functional Programming'
 The process of building software by composing pure functions.
 avoiding shared state, mutable data, and side-effects 
 ```
 
-```js title='Side Effects'
+```markdown title='Side Effects'
   A side effect is any application state change that is 
   observable outside the called function other than its return value. 
 ```
 
-```js title='Pure Function'
-  
+```markdown title='Pure Function'
   Given the same input, will always return the same output.
-  
   Produces no side effects.
-
 ```
 
 ```js file=./codesnipets/caseforPurity1.js title='Purity'
@@ -136,15 +133,50 @@ const doubleItems = arr => arr.map(v => v * 2)
 
 </Step>
 
-<Step subtitle="Composition">
+<Step title="Array Methods">
 
-```js 1:7 file=./codesnipets/doubleItems.js
+```js title='Impure'
+splice()
+pop()
+push()
+shift()
+unshift()
 ```
 
 ```js
-const double = v => v * 2
+slice() 🍕
+concat()
+filter()
+map()
+reduce()
+```
 
-const doubleItems = arr => arr.map(double)
+</Step>
+
+<Step title="Array Methods">
+
+```js title='Impure'
+splice()
+
+const pizzaArr = [0,1,2,3]  // const ¯\_( ツ )_/¯
+slices.splice(0,2)
+pizzaArr // [🍕. 🍕, 🍕] 
+
+push()
+shift()
+unshift()
+```
+
+```js
+slice() 🍕
+
+const arr1 = [🍕, 🍕, 🍕, 🍕, 🍕];
+const arr2 = arr1.slice(0, 2) // [🍕. 🍕, 🍕]
+
+concat()
+filter()
+map()
+reduce()
 ```
 
 </Step>
