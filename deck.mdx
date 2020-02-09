@@ -7,7 +7,7 @@ import { github, vsDark } from "@code-surfer/themes";
 
 export const theme = vsDark;
 
-# Oi 👋
+# FP 👋
 
 ---
 
@@ -15,34 +15,80 @@ export const theme = vsDark;
 
 ```js
 
-Was ist Functional Programming? 
+Was ist Functional Programming?
 
 ```
 
-```js
-Paradigma
-
-Erste Class Functions
-Pureness
-Immutability
-Composition
-und andere fancy Words 
-wie Referential Transparency (mehr dazu später)
+```md title='Functional Programming'
+The process of building software by composing pure functions.
+avoiding shared state, mutable data, and side-effects 
 ```
 
-```diff 1 subtitle="Eine Denkweise"
+```js title='Side Effects'
+  A side effect is any application state change that is 
+  observable outside the called function other than its return value. 
 ```
 
-```diff 3 subtitle="Man kann Functions wie jeder anderen Data Type behandeln, in Arrays speichern, als Params oder Return Values weiterreichen, in Variablen speichern und dazu sind die in JS Callable"
+```js title='Pure Function'
+  
+  Given the same input, will always return the same output.
+  
+  Produces no side effects.
+
 ```
 
-```diff 4 subtitle="Nehmen ein Input und returne einen Output, verursachen keine Side Effects außerhalb der Funktion: negativ Bspl: Global Variables"
+```js file=./codesnipets/caseforPurity1.js title='Purity'
 ```
 
-```diff 5 subtitle="Data Strukturen nicht mutieren, sondern kopieren und dann modifizieren"
+```js file=./codesnipets/caseForPurity2.js title=Purity 
 ```
 
-```diff 6 subtitle="Data Strukturen nicht mutieren, sondern kopieren und dann modifizieren"
+```js title='Purity'
+  
+  var counter = 1
+
+  incrementCounter()
+
+  console.log(counter) // 2
+  
+```
+
+```js 4 title='Purity' subtitle=' ️⚠️️ Impurity Indikator: Funktionen deren return Value nicht benutzt wird'
+  
+  var counter = 1
+
+  incrementCounter()
+
+  console.log(counter) // 2
+  
+```
+
+```js title='Is it Pure?'
+
+const buttonId = 'ms-button'
+
+const findButton = () => 
+  document.getElementById(buttonId)
+
+```
+
+```js title='Is it Pure?'
+
+const findButton = buttonId => 
+  document.getElementById(buttonId)
+
+```
+
+```js title='Is it Pure?'
+
+const findButton = (buttonId, document) =>
+  document.getElementById(buttonId)
+  
+```
+
+```
+Functional programming is declarative rather than imperative,
+and application state flows through pure functions.
 ```
 
 </CodeSurfer>
@@ -51,12 +97,12 @@ wie Referential Transparency (mehr dazu später)
 
 <CodeSurferColumns>
 
-<Step subtitle="1">
+<Step>
 
-```js file=./codesnipets/doubleitems.js
+```js file=./codesnipets/doubleitems.js title='Imperativ'
 ```
 
-```js
+```js title='Declarativ'
 const doubleItems = arr => arr.map(v => v * 2)
 ```
 
