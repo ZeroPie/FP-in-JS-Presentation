@@ -188,7 +188,8 @@ reduce()
 splice()
 pop()
 
-const menu = [🍕, 🍕, 🍕, 🍕, 🥦];
+const fruits = [🍏, 🍑, 🍒]
+fruits.pop()
 
 push()
 shift()
@@ -197,13 +198,13 @@ unshift()
 
 ```js
 slice() 🍕
+
+const fruits = [🍏, 🍑, 🍒]
+const poppedFruits = fruits.slice(0, -1)
+
 concat()
 filter()
 map()
-
-const menu = [🍕, 🍕, 🍕, 🍕, 🥦];
-const newMenu = menu.map()
-
 reduce()
 ```
 
@@ -213,8 +214,9 @@ reduce()
 
 ```js title='Impure'
 splice()
-pop()
 push()
+pop()
+
 shift()
 unshift()
 ```
@@ -229,13 +231,21 @@ reduce()
 
 </Step>
 
-<Step title="Currying">
+<Step title="Currying 🍛">
 
 ```js
 
-const prepareFood = (a, b) => b => a(b)  
+const addBy = x, y => x => x + y  
 
-```
+```js
+
+"use strict";
+
+var addBy = function sum(x, y) {
+  return function (x) {
+    return x + y;
+  };
+};
 
 ```js
 
