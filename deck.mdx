@@ -24,14 +24,49 @@ The process of building software by composing pure functions.
 avoiding shared state, mutable data, and side-effects 
 ```
 
-```markdown title='Side Effects'
-  A side effect is any application state change that is 
-  observable outside the called function other than its return value. 
+```js title='Functions are first class in Javascript' subtitle='Können wie andere Datatypen behandelt werden'
+  
+  const hi = name => `Hi ${name}`;
+  const arr = [hi]
+  const yell(hi)
+  etc..
+
+```
+
+```js title='Functions sind callable' 
+  
+  const hi = name => `Hi ${name}`
+  const greeting = name => hi(name)
+
+```
+
+```js title='Functions sind callable' 
+  
+  const hi = name => `Hi ${name}`
+  const greeting = hi
+
+```
+
+```js title='Functions sind callable' 
+  
+const getServerStuff = callback => ajaxCall(json => callback(json));
+
+```
+
+```js title='Functions sind callable' 
+  
+const getServerStuff = ajaxCall;
+
 ```
 
 ```markdown title='Pure Function'
   Given the same input, will always return the same output.
   Produces no side effects.
+```
+
+```markdown title='Side Effects'
+  A side effect is any application state change that is 
+  observable outside the called function other than its return value. 
 ```
 
 ```js file=./codesnipets/caseforPurity1.js title='Purity'
@@ -99,39 +134,6 @@ and application state flows through pure functions.
 ---
 
 <CodeSurferColumns>
-
-<Step>
-
-```js file=./codesnipets/doubleitems.js title='Imperativ'
-```
-
-```js title='Declarativ'
-const doubleItems = arr => arr.map(v => v * 2)
-```
-
-</Step>
-
-<Step subtitle="Mutation">
-
-```js 4[18:22] file=./codesnipets/doubleitems.js
-```
-
-```js
-const doubleItems = arr => arr.map(v => v * 2)
-```
-
-</Step>
-
-<Step subtitle="Impure Variante">
-
-```js 1:7 file=./codesnipets/doubleItemsMutate.js
-```
-
-```js
-const doubleItems = arr => arr.map(v => v * 2)
-```
-
-</Step>
 
 <Step title="Array Methods">
 
@@ -326,33 +328,310 @@ const arrLenght = newArr.length
 
 </Step>
 
-<Step title="Currying 🍛">
+<Step title="map()">
 
 ```js
-
-const addBy = x, y => x => x + y  
-
-```js
-
-"use strict";
-
-var addBy = function sum(x, y) {
-  return function (x) {
-    return x + y;
-  };
-};
+Die map() Methode wendet auf jedes Element des Arrays die 
+bereitgestellte Funktion an und gibt das Ergebnis in einem neuen Array zurück.
+```
 
 ```js
-
-var prepareFood = function prepareFood(a, b) {
-  return function (b) {
-    return a(b)
-  }
-}
-
+const doubledItems = arr.map(v => v * 2)
 ```
 
 </Step>
+
+<Step>
+
+```js file=./codesnipets/doubleitems.js
+```
+
+```js title='Declarativ'
+const doubleNumber = v => v * 2
+const doubled = arr.map(doubleNumber)
+```
+
+</Step>
+
+<Step subtitle="Mutation">
+
+```js 4[18:22] file=./codesnipets/doubleitems.js
+```
+
+```js
+const doubled = arr.map(doubleNumber)
+```
+
+</Step>
+
+<Step subtitle="Oops i mutated you again">
+
+```js 1:7 file=./codesnipets/doubleItemsMutate.js
+```
+
+```js
+const doubled = arr.map(doubleNumber)
+```
+
+</Step>
+
+<Step title="Currying 🍛" subtitle="Von Multiple Arguments zu eine Funktion die weniger arguments animmt">
+
+```js
+const arr = [1,1,1,1]
+
+const multiplyBy = (factor, number) 
+  => number 
+  => factor * number
+
+const double = multiplyBy(2)
+const triple = multiplyBy(3)
+
+arr.map(double)
+```
+
+```js
+
+const arr = [1,1,1,1]
+
+var multiplyBy = function multiplyBy(factor, number) {
+  return function (number) {
+    return factor * number
+  }
+}
+
+const double = multiplyBy(2)
+const triple = multiplyBy(3)
+
+arr.map(double)
+```
+
+</Step>
+
+<Step title="Currying 🍛">
+
+``` js 3 file=./codesnipets/curryESNext.js
+```
+
+```js 3 file=./codesnipets/curryES15.js
+```
+
+</Step>
+
+<Step title="Currying 🍛">
+
+``` js 4 file=./codesnipets/curryESNext.js
+```
+
+```js 4 file=./codesnipets/curryES15.js
+```
+
+</Step>
+
+<Step title="Currying 🍛">
+
+``` js 5 file=./codesnipets/curryESNext.js
+```
+
+```js 5 file=./codesnipets/curryES15.js
+```
+
+</Step>
+
+<Step title="Currying 🍛" subtitle='Partial Application'>
+
+``` js 7 file=./codesnipets/curryESNext.js
+```
+
+```js 9 file=./codesnipets/curryES15.js
+```
+
+</Step>
+
+<Step title="Currying 🍛" subtitle='Partial Application'>
+
+``` js 8 file=./codesnipets/curryESNext.js
+```
+
+```js 10 file=./codesnipets/curryES15.js
+```
+
+</Step>
+
+<Step title="Currying 🍛" subtitle='Partial Application'>
+
+``` js 8 file=./codesnipets/curryESNext.js
+```
+
+```js 10 file=./codesnipets/curryES15.js
+```
+
+</Step>
+
+<Step title="Currying 🍛" subtitle='Partial Application'>
+
+``` js 10:12 file=./codesnipets/curryESNext.js
+```
+
+```js 12:14 file=./codesnipets/curryES15.js
+```
+
+</Step>
+
+<Step title="Currying 🍛" subtitle="Composition: Output einer Function als Input einer anderen nehmen">
+
+```js 2
+const doubleAndTriple = x 
+  => double(triple(x))
+
+arr.map(doubleAndTriple)
+```
+
+```js 2
+var doubleAndTriple = function doubleAndTriple(x) {
+  return double(triple(x));
+};
+
+arr.map(doubleAndTriple)
+```
+
+</Step>
+
+<Step title="Currying 🍛" subtitle="Composition">
+
+```js 
+const doubleAndTriple = x => double(triple(x))
+
+arr.map(doubleAndTriple)
+```
+
+```js
+var doubleAndTriple = function doubleAndTriple(x) {
+  return double(triple(x));
+};
+
+arr.map(doubleAndTriple)
+```
+
+</Step>
+
+<Step title="Composition" subtitle="sieht nicht mehr so lecker aus">
+
+```js 
+const tripleAdd3DivBy5 = x => divBy5(add2(triple(x)))
+```
+
+```js
+var tripleAdd3DivBy5 = function tripleAdd3DivBy5(x) {
+  return divBy5(add2(triple(x)))
+}
+```
+
+</Step>
+
+<Step title="Composition">
+
+```js 
+const compose = (f1, f2) => f1 => f2(f1)
+const add2Andtriple = compose(add2, triple)
+const tripleAdd3DivBy5 = x => divBy5(add2Andtriple(x))
+```
+
+```js
+var tripleAdd3DivBy5 = function tripleAdd3DivBy5(x) {
+  return divBy5(add2(triple(x)))
+}
+```
+
+</Step>
+
+<Step title="Composition">
+
+```js 
+const compose = (f1, f2, f3) => (f1,f2) => f3(f2(f1))
+
+const tripleAdd3DivBy5 = compose(divBy5, add2, triple)
+```
+
+```js
+var tripleAdd3DivBy5 = function tripleAdd3DivBy5(x) {
+  return divBy5(add2(triple(x)))
+}
+```
+
+</Step>
+
+<Step title="Composition">
+
+```js 
+const compose = (...functions) => args => functions.reduceRight((arg, fn) => fn(arg), args);
+const tripleAdd3DivBy5 = x => divBy5(add2(triple(x)))
+```
+
+```js
+var tripleAdd3DivBy5 = function tripleAdd3DivBy5(x) {
+  return divBy5(add2(triple(x)))
+}
+```
+
+</Step>
+
+<Step title="Composition">
+
+```js 
+const compose = (...functions) => args => functions.reduceRight((arg, fn) => fn(arg), args);
+const pipe = (...functions) => args => functions.reduce((arg, fn) => fn(arg), args);
+```
+
+```js
+var tripleAdd3DivBy5 = function tripleAdd3DivBy5(x) {
+  return divBy5(add2(triple(x)))
+}
+```
+
+</Step>
+
+<Step title="Composition">
+
+```js 
+const compose = (...functions) => args => functions.reduceRight((arg, fn) => fn(arg), args);
+const pipe = (...functions) => args => functions.reduce((arg, fn) => fn(arg), args);
+```
+
+```js
+pipe(add, mult, div) // right to left
+compose(div, mult, add) // left to right
+```
+
+</Step>
+
+<Step title="Composition">
+
+```js 
+const compose = (...functions) => args => functions.reduceRight((arg, fn) => fn(arg), args);
+const pipe = (...functions) => args => functions.reduce((arg, fn) => fn(arg), args);
+```
+
+```js
+pipe(add, mult, div) // right to left
+compose(div, mult, add) // left to right
+```
+
+</Step>
+
+<Step>
+
+```js 
+Utils
+```
+
+```js
+https://ramdajs.com/
+```
+
+</Step>
+
+
 
 
 </CodeSurferColumns>
