@@ -346,7 +346,7 @@ const doubledItems = arr.map(v => v * 2)
 ```js file=./codesnipets/doubleitems.js
 ```
 
-```js title='Declarativ'
+```js
 const doubleNumber = v => v * 2
 const doubled = arr.map(doubleNumber)
 ```
@@ -538,8 +538,16 @@ const tripleAdd3DivBy5 = x => divBy5(add2Andtriple(x))
 ```
 
 ```js
+var compose = function compose(f1, f2) {
+  return function (f1) {
+    return f2(f1);
+  };
+};
+
+var add2Andtriple = compose(add2, triple);
+
 var tripleAdd3DivBy5 = function tripleAdd3DivBy5(x) {
-  return divBy5(add2(triple(x)))
+  return divBy5(add2Andtriple(x));
 }
 ```
 
@@ -548,15 +556,21 @@ var tripleAdd3DivBy5 = function tripleAdd3DivBy5(x) {
 <Step title="Composition">
 
 ```js 
-const compose = (f1, f2, f3) => (f1,f2) => f3(f2(f1))
+const compose = (f1, f2, f3) 
+  => (f1,f2)
+  => f3(f2(f1))
 
 const tripleAdd3DivBy5 = compose(divBy5, add2, triple)
 ```
 
 ```js
-var tripleAdd3DivBy5 = function tripleAdd3DivBy5(x) {
-  return divBy5(add2(triple(x)))
-}
+var compose = function compose(f1, f2, f3) {
+  return function (f1, f2) {
+    return f3(f2(f1));
+  };
+};
+
+var tripleAdd3DivBy5 = compose(divBy5, add2, triple);
 ```
 
 </Step>
@@ -564,14 +578,23 @@ var tripleAdd3DivBy5 = function tripleAdd3DivBy5(x) {
 <Step title="Composition">
 
 ```js 
-const compose = (...functions) => args => functions.reduceRight((arg, fn) => fn(arg), args);
-const tripleAdd3DivBy5 = x => divBy5(add2(triple(x)))
+const compose = (...functions) 
+  => args 
+  => functions.reduceRight((arg, fn) => fn(arg), args);
 ```
 
 ```js
-var tripleAdd3DivBy5 = function tripleAdd3DivBy5(x) {
-  return divBy5(add2(triple(x)))
-}
+var compose = function compose() {
+  for (var _len = arguments.length, functions = new Array(_len), _key = 0; _key < _len; _key++) {
+    functions[_key] = arguments[_key];
+  }
+
+  return function (args) {
+    return functions.reduceRight(function (arg, fn) {
+      return fn(arg);
+    }, args);
+  };
+};
 ```
 
 </Step>
@@ -579,59 +602,38 @@ var tripleAdd3DivBy5 = function tripleAdd3DivBy5(x) {
 <Step title="Composition">
 
 ```js 
-const compose = (...functions) => args => functions.reduceRight((arg, fn) => fn(arg), args);
-const pipe = (...functions) => args => functions.reduce((arg, fn) => fn(arg), args);
+const pipe = (...functions) 
+  => args 
+  => functions.reduce((arg, fn) => fn(arg), args);
 ```
 
 ```js
-var tripleAdd3DivBy5 = function tripleAdd3DivBy5(x) {
-  return divBy5(add2(triple(x)))
-}
-```
 
+var pipe = function pipe() {
+  for (var _len = arguments.length, functions = new Array(_len), _key = 0; _key < _len; _key++) {
+    functions[_key] = arguments[_key];
+  }
+
+  return function (args) {
+    return functions.reduce(function (arg, fn) {
+      return fn(arg);
+    }, args);
+  };
+};
+
+```
 </Step>
 
 <Step title="Composition">
 
 ```js 
-const compose = (...functions) => args => functions.reduceRight((arg, fn) => fn(arg), args);
-const pipe = (...functions) => args => functions.reduce((arg, fn) => fn(arg), args);
+const tripleAdd3DivBy5 = compose(divBy5,add2,triple)
 ```
 
 ```js
-pipe(add, mult, div) // right to left
-compose(div, mult, add) // left to right
+ const tripleAdd3DivBy5 = pipe(triple,add2,divBy5)
 ```
-
 </Step>
-
-<Step title="Composition">
-
-```js 
-const compose = (...functions) => args => functions.reduceRight((arg, fn) => fn(arg), args);
-const pipe = (...functions) => args => functions.reduce((arg, fn) => fn(arg), args);
-```
-
-```js
-pipe(add, mult, div) // right to left
-compose(div, mult, add) // left to right
-```
-
-</Step>
-
-<Step>
-
-```js 
-Utils
-```
-
-```js
-https://ramdajs.com/
-```
-
-</Step>
-
-
 
 
 </CodeSurferColumns>
