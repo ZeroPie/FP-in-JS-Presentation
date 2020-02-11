@@ -15,7 +15,15 @@ export const theme = vsDark;
 
 ```js
 
-Was ist Functional Programming?
+const fobPpl = ['Wiebke', 'Lukas', 'Bianca', 'Vidyu', 'Sylwya', 'Joel',
+'Dominik', 'Pascal', 'Marcel', 'Felix', 'Andre', 'Kathi']
+
+
+const sayWordTo = (word, name) => name => `${word} ${name}`
+
+const sayHiTo = sayWordTo('Hi')
+
+fobPpl.map(sayHiTo)
 
 ```
 
@@ -24,39 +32,40 @@ The process of building software by composing pure functions.
 avoiding shared state, mutable data, and side-effects 
 ```
 
-```js title='Functions are first class in Javascript' subtitle='Können wie andere Datatypen behandelt werden'
+```js title='First Class Functions' subtitle='Können wie andere Datatypen behandelt werden'
   
-  const hi = name => `Hi ${name}`;
-  const arr = [hi]
-  const yell(hi)
+  const sayHiTo = name => `Hi ${name}`;
+  const arr = [sayHiTo]
+  const yellHiTo = yell(sayHi)
+  greetings = { 
+    sayHiTo,
+    yellHiTo
+  }
   etc..
 
 ```
 
 ```js title='Functions sind callable' 
-  
   const hi = name => `Hi ${name}`
-  const greeting = name => hi(name)
-
 ```
 
-```js title='Functions sind callable' 
-  
+```js title='Functions sind callable'   
   const hi = name => `Hi ${name}`
-  const greeting = hi
-
+  const greet = name => hi(name)
 ```
 
-```js title='Functions sind callable' 
-  
+```js title='Functions sind callable' subtitle="Same Thing"  
+  const hi = name => `Hi ${name}`
+  const greet = name => hi(name)           const greet = hi
+```
+
+```js
 const getServerStuff = callback => ajaxCall(json => callback(json));
-
 ```
 
-```js title='Functions sind callable' 
-  
-const getServerStuff = ajaxCall;
-
+```js subtitle="Same Thing" 
+const getServerStuff = callback => 
+  ajaxCall(json => callback(json))       const getServerStuff = ajaxCall;
 ```
 
 ```markdown title='Pure Function'
@@ -331,12 +340,16 @@ const arrLenght = newArr.length
 <Step title="map()">
 
 ```js
-Die map() Methode wendet auf jedes Element des Arrays die 
-bereitgestellte Funktion an und gibt das Ergebnis in einem neuen Array zurück.
+Die map() Methode wendet auf jedes Element des Arrays 
+die bereitgestellte Funktion an 
+und gibt das Ergebnis in einem neuen Array zurück.
+
+
+arr.map(x => x * 2)
 ```
 
 ```js
-const doubledItems = arr.map(v => v * 2)
+`
 ```
 
 </Step>
