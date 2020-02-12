@@ -628,6 +628,8 @@ const compose = (f1, f2, f3)
   => f3(f2(f1))
 
 const tripleAdd3DivBy5 = compose(divBy5, add2, triple)
+
+arr.map(tripleAdd3DivBy5)
 ```
 
 ```js
@@ -638,6 +640,7 @@ var compose = function compose(f1, f2, f3) {
 };
 
 var tripleAdd3DivBy5 = compose(divBy5, add2, triple);
+arr.map(tripleAdd3DivBy5)
 ```
 
 </Step>
