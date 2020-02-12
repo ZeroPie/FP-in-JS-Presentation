@@ -73,9 +73,25 @@ const getServerStuff = callback =>
   Produces no side effects.
 ```
 
+```js title='We lie.. a lot'
+
+Was ist eine function()?
+
+```
+
+```js title='We lie... a lot'
+
+function         assoziation
+
+f(1) => 2        a(1) => 2
+f(2) => 4        a(1) => 4
+f(3) => 6        a(1) => 3
+
+```
+
 ```markdown title='Side Effects'
-  A side effect is any application state change that is 
-  observable outside the called function other than its return value. 
+  Any application state change that is 
+  observable outside the called function (other than its return value)
 ```
 
 ```js file=./codesnipets/caseforPurity1.js title='Purity'
