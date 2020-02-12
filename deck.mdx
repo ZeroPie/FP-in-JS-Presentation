@@ -32,16 +32,23 @@ The process of building software by composing pure functions.
 avoiding shared state, mutable data, and side-effects 
 ```
 
-```js title='First Class Functions' subtitle='Können wie andere Datatypen behandelt werden'
-  
-  const sayHiTo = name => `Hi ${name}`;
-  const arr = [sayHiTo]
-  const yellHiTo = yell(sayHi)
-  greetings = { 
-    sayHiTo,
-    yellHiTo
-  }
-  etc..
+```js file=./codesnipets/firstClassFunctions.js title='First Class Functions' subtitle='Können wie andere Datatypen behandelt werden'
+
+```
+
+```js 1 file=./codesnipets/firstClassFunctions.js title='First Class Functions' subtitle='Können wie andere Datatypen behandelt werden'
+
+```
+
+```js 3 file=./codesnipets/firstClassFunctions.js title='First Class Functions' subtitle='Können wie andere Datatypen behandelt werden'
+
+```
+
+```js 5 file=./codesnipets/firstClassFunctions.js title='First Class Functions' subtitle='Können wie andere Datatypen behandelt werden'
+
+```
+
+```js 7 file=./codesnipets/firstClassFunctions.js title='First Class Functions' subtitle='Können wie andere Datatypen behandelt werden'
 
 ```
 
@@ -73,50 +80,44 @@ const getServerStuff = callback =>
   Produces no side effects.
 ```
 
-```js title='We lie.. a lot'
+```js
 
-Was ist eine function()?
+Was ist eine Funktion?
 
 ```
 
 ```js title='We lie... a lot'
 
-function         assoziation
+                    Funktion         assoziation
 
-f(1) => 2        a(1) => 2
-f(2) => 4        a(1) => 4
-f(3) => 6        a(1) => 3
+                    f(1) => 2        a(1) => 2
+                    f(2) => 4        a(1) => 4
+                    f(3) => 6        a(1) => 3
 
 ```
 
 ```markdown title='Side Effects'
-  Any application state change that is 
-  observable outside the called function (other than its return value)
+  Any application state change that is observable outside the called function 
+                  (other than its return value)
 ```
 
-```js file=./codesnipets/caseforPurity1.js title='Purity'
+```js 4 title='Certainty' subtitle="Was erwarten wir"
+                    const numbers = [1, 2, 3]
+                    double(numbers)
+
+                    numbers // = ?
 ```
 
-```js file=./codesnipets/caseForPurity2.js title=Purity 
+```js 9 title='Certainty' subtitle="Was erwarten wir?" file=./codesnipets/caseForPurity2.js title=Purity title='Certainty'
 ```
 
-```js title='Purity'
+```js 4 title='Impurity giveaway' subtitle='Funktionen deren return Value nicht benutzt wird'
   
-  var counter = 1
+                            var counter = 1
 
-  incrementCounter()
+                            incrementCounter()
 
-  console.log(counter) // 2
-  
-```
-
-```js 4 title='Purity' subtitle=' ️⚠️️ Impurity Indikator: Funktionen deren return Value nicht benutzt wird'
-  
-  var counter = 1
-
-  incrementCounter()
-
-  console.log(counter) // 2
+                            console.log(counter) // 2
   
 ```
 
@@ -143,18 +144,75 @@ const findButton = (buttonId, document) =>
   
 ```
 
-```js file=./codesnipets/daysThisMonthImpure.js
-```
-
-```js file=./codesnipets/daysThisMonthPure.js
-```
-
 ```js
 Functional programming is declarative rather than imperative,
 and application state flows through pure functions.
 ```
 
 </CodeSurfer>
+
+---
+
+---
+
+<CodeSurferColumns>
+
+<Step title="Extract Impurity">
+
+```js file=./codesnipets/daysThisMonthImpure.js
+```
+
+```js file=./codesnipets/daysThisMonthPure.js
+```
+
+</Step>
+
+<Step title="Extract Impurity">
+
+```js file=./codesnipets/addCommentImpure.js
+```
+
+```js
+`
+```
+
+</Step>
+
+<Step title="Extract Impurity">
+
+```js file=./codesnipets/addCommentImpure.js
+```
+
+```js file=./codesnipets/addCommentPure.js
+```
+
+</Step>
+
+<Step title="Extract Impurity">
+
+```js file=./codesnipets/doubleitems.js
+```
+
+```js
+const doubleNumber = v => v * 2
+const doubled = arr.map(doubleNumber)
+```
+
+</Step>
+
+<Step title="Contain Impurity">
+
+```js file=./codesnipets/doubleitems.js
+```
+
+```js
+const doubleNumber = v => v * 2
+const doubled = arr.map(doubleNumber)
+```
+
+</Step>
+
+</CodeSurferColumns>
 
 ---
 
