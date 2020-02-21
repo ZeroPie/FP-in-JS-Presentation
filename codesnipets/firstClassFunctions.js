@@ -1,3 +1,5 @@
+const hi = name => `Hi ${name}`
+
 const greet = name => hi
 
 const arr = [greet]
