@@ -43,56 +43,85 @@ export const theme = vsDark;
 
 
 ```js title='Was ist eine Funktion?'
-  A function is a process that associates to each element of a set X a single element of a set Y.
+  A function is a process that maps the domain to the range (ok...)
+```
+
+```js title='Was ist eine Funktion?' subtitle='Deftones - Back to School.mp3:'
+  In other Words:
+  A Function associates to each Element of a set of X a single element of a set Y.
+  
   y = f(x)
-```
 
-```js title='We lie... a lot'
+                      Funktion         Prozedur/Assoziation
 
-                    Funktion         Prozedur/Assoziation
-
-                    f(1) => 2           a(1) => 2
-                    f(2) => 4           a(1) => 4
-                    f(3) => 6           a(1) => 3
+                      f(1) => 2           a(1) => 2
+                      f(2) => 4           a(1) => 4
+                      f(3) => 6           a(1) => 3`
 
 ```
 
-```
-    Takes an input, always returns the same output for that input
-    Produces no side Effects
-```
-
-```js title='Functions in JS' 
-  A set of statements that performs a task.
-  Every JavaScript function is a Function object (First class object). 
-  They can have properties and methods just like any other object.
-  What distinguishes them from other objects is that functions can be called.  
+```md title='Functions in JS'
+    In Javascript: 
+    A set of statements that performs a task.
+    Functions are Objects and have properties and methods.
+    What distinguishes them from other objects is that functions can be called.
+    Functions are first class citizens 🧐
 ```
 
-
-```js 1 file=./codesnipets/firstClassFunctions.js title='First Class Functions' subtitle='Können wie andere Datatypen behandelt werden'
-
+```js title='Functions sind callable' subtitle='All Devs: Thanks Mr. Obvious'
+    const hi = name => `Hi ${name}`
 ```
 
-```js 3 file=./codesnipets/firstClassFunctions.js title='First Class Functions' subtitle='Können wie andere Datatypen behandelt werden'
-
+```js 2 title='Functions sind callable' subtitle='Mr. Obvious: Im Just saying this'
+    const hi = name => `Hi ${name}`
+    const greet = name => hi(name)
 ```
 
-```js 5 file=./codesnipets/firstClassFunctions.js title='First Class Functions' subtitle='Können wie andere Datatypen behandelt werden'
-
+```js title='Functions sind callable' subtitle="and this is the same thing"  
+    const hi = name => `Hi ${name}`
+    const greet = name => hi(name)           const greet = hi
 ```
 
-```js 7 file=./codesnipets/firstClassFunctions.js title='First Class Functions' subtitle='Können wie andere Datatypen behandelt werden'
-
+```js title='Functions sind callable' subtitle="What about this?"  
+    const getServerStuff = callback => ajaxCall(json => callback(json));
 ```
 
-```js title='Functions sind callable' 
-  const hi = name => `Hi ${name}`
+```js title='Functions sind callable' subtitle="Same Thing"   
+    const getServerStuff = callback => 
+    ajaxCall(json => callback(json))       const getServerStuff = ajaxCall;
 ```
 
-```js title='Functions sind callable'   
-  const hi = name => `Hi ${name}`
-  const greet = name => hi(name)
+```js title='Thats a fine thing'
+    const fetchResults = (endpoint, callback) => { ...  }
+    const renderResults = results => { ... }
+
+    fetchResults('autoscout/v2/autos?location=bonn', json => renderResults(json))
+```
+
+```js title='FetchResults has changed'
+    const fetchResults = (endpoint, callback) => { ... return callback(results, error) }
+    const renderResults = results => { ... }
+    
+    fetchResults('autoscout/v2/autos?location=bonn', json => renderResults(json))
+```
+
+
+```js title='FetchResults has changed'
+
+    const fetchResults = (endpoint, callback) => { ... return callback(results, error) }
+    
+    const renderResults = (results, error) => error ? error : results
+
+    fetchResults('autoscout/v2/autos?location=bonn', (json, error) => renderResults(json, error))
+```
+
+```js title='Less Code, less Changes, maybe less Bugs'
+
+    const fetchResults = (endpoint, callback) => { ... return callback(results, error) }
+    
+    const renderResults = (results, error) => error ? error : results
+
+    fetchResults('autoscout/v2/autos?location=bonn', renderResults)
 ```
 
 </CodeSurfer>
@@ -103,7 +132,21 @@ export const theme = vsDark;
 
 <Step>
 
-```js file=./codesnipets/firstClassFunctions.js title='First Class Functions' subtitle='Können wie andere Datatypen behandelt werden'
+```js 3 file=./codesnipets/firstClassFunctions.js title='First Class Citizens' subtitle='Can be arguments to other functions'
+```
+
+</Step>
+
+<Step>
+
+```js 5 file=./codesnipets/firstClassFunctions.js title='First Class Citizens' subtitle='Can be returned from other functions'
+```
+
+</Step>
+
+<Step>
+
+```js file=./codesnipets/firstClassFunctions.js title='First Class Citizens' subtitle='Returning them as Arguments'
 ```
 
 </Step>
@@ -125,6 +168,15 @@ export const theme = vsDark;
 <Step>
 
 ```js 7 file=./codesnipets/firstClassFunctions.js title='First Class Functions' subtitle='Können wie andere Datatypen behandelt werden'
+```
+
+</Step>
+
+<Step>
+
+```markdown title='Pure Function'
+  Given the same input, will always return the same output.
+  Produces no side effects.
 ```
 
 </Step>
@@ -190,7 +242,32 @@ Or use a component...
 
 <CodeSurferColumns> 
 
+
 <Step title="Reduce"> 
+
+```md
+## The Swiss Knife!
+
+arr.reduce(callback( accumulator, currentValue[, index[, array]] )[, initialValue])
+
+```
+
+</Step>
+
+<Step title="Reduce"> 
+
+```md
+## The Swiss Knife!
+
+arr.reduce(callback( accumulator, currentValue[, index[, array]] )[, initialValue])
+
+Ez right? Nah, not so evident! examples
+
+```
+
+</Step>
+
+<Step title="Reduce" subtitle="The Swiss Knife"> 
 
 ``` js 
   const initialValue = 10
@@ -201,7 +278,21 @@ Or use a component...
 
 </Step>
 
-<Step title="Reduce"> 
+<Step title="Reduce" subtitle="Extracted to a reducer"> 
+
+``` js 
+  const initialValue = 10
+  const sodexosUsed = [1,1,1,1]
+  const sodexosReducer = (accumulator, currentValue) => accumulator - currentValue
+
+  const sodexosLeft = sodexosUsed.reduce(sodexosReducer, initialValue)
+
+```
+
+</Step>
+
+
+<Step title="Reduce" subtitle="Extracted to a reducer"> 
 
 ``` js 
   const initialValue = 10
@@ -219,6 +310,16 @@ Or use a component...
 ``` md
   But it looks crazy
   Whats the point?
+```
+
+</Step>
+
+<Step title="Reduce"> 
+
+``` md
+  You can transform Data in a lot of ways!
+  You can implement other functions such as map and filter, flatMap and others!
+  Examples:
 ```
 
 </Step>
