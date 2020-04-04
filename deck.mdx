@@ -115,7 +115,7 @@ export const theme = vsDark;
     fetchResults('autoscout/v2/autos?location=bonn', (json, error) => renderResults(json, error))
 ```
 
-```js title='Less Code, less Changes, maybe less Bugs'
+```js title='Less Code, less Changes, maybe less Bugs' subtilte='Point Free/Tacit Style: You don't specify arguments, functions are defined as products from other functions'
 
     const fetchResults = (endpoint, callback) => { ... return callback(results, error) }
     
