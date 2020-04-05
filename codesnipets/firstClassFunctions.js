@@ -1,11 +1,7 @@
-const sayHiTo = name => `Hi ${name}`
+const sayHi = name => `Hi ${name}`
 
-map(sayHiTo)
+map(sayHi)
 
-const bidFarewellTo = name => `Bye ${name}`
+const randomArr = [ sayHi, '2', {} ]
 
-const greet = name => hiTo
-
-const greetings = [ greet, bidFarewellTo ]
-
-const greeTingsObj = { ...greetings }
+const randomObj = { ...randomArr }
