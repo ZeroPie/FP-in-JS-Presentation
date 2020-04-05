@@ -32,48 +32,133 @@ export const theme = vsDark;
 
 ```markdown title='Functional Programming'
   
-  - The process of building software by composing pure functions.
-    (avoiding shared state, mutable data, and side effects)
+  - The process of building software by composing pure functions, 
+  avoiding shared state, mutable data, and side effects.
 
   - Lego mit Funktionen
 ```
 
+```
+Benefits:
+
+ - Weniger Bugs 
+ - Parallelism
+ - Modularity
+ - Testability
+ - Lazy Evaluation
+
+```
+
 ```md title='Was ist eine Funktion?' subtitle='Deftones - Back to School.mp3:'
 
-  A Function is a process that maps the domain to the range (ok...)
-
-  In other Words:
-  A Function associates to each Element of a set of X a single element of a set Y.
+  A Function is a process that maps the domain to the range... ok...
   
-  y = f(x)
+                      y = f(x * 2)
+                      Function         
 
-                      Funktion         Prozedur/Assoziation
-
-                      f(1) => 2           a(1) => 2
-                      f(2) => 4           a(1) => 4
-                      f(3) => 6           a(1) => 3
-
+                      f(1) = 2           
+                      f(2) = 4           
+                      f(3) = 6
 ```
 
 ```js title='Functions in JS'
+
+    A subprogram of type Function with properties and methods
+    
     Functions sind "first class citizens" 🧐
 ```
 
-```js title='Functions in JS'
-    Functions sind "first class citizens" 🧐
-    Werden wie andere types behandelt
+```js title='Function in JS'
+    Object of type Function with properties and methods
+
+    Subprograms with params, bodies and return values  // obvious...
+    
+    Functions sind "first class citizens" 🧐 // Fun!
 ```
 
-```js 1 file=./codesnipets/firstClassFunctions.js title='First Class Functions' subtitle='Assigned to Vars'
+```js 1 file=./codesnipets/firstClassFunctions.js title='First Class Citizens?' subtitle='Assigned to Variables'
 ```
 
 ```js 3 file=./codesnipets/firstClassFunctions.js title='First Class Functions' subtitle='Used as arguments'
 ```
 
-```js 5 file=./codesnipets/firstClassFunctions.js title='First Class Functions' subtitle='Stored in Arrays'
+```js 5 file=./codesnipets/firstClassFunctions.js title='First Class Functions' subtitle='Stored in arrays'
 ```
 
-```js 7 file=./codesnipets/firstClassFunctions.js title='First Class Functions' subtitle='Stored in Objects'
+```js 7 file=./codesnipets/firstClassFunctions.js title='First Class Functions' subtitle='Stored in objects'
+```
+
+```js title='Functions sind callable'   
+  const hi = name => `Hi ${name}`
+
+  const greet = name => hi(name)
+```
+
+```js title='Functions sind callable' subtitle="Same Thing"  
+  const hi = name => `Hi ${name}`
+
+  const greet = name => hi(name)           const greet = hi
+```
+
+```js title='Benefits of being Callable?'
+const getServerStuff = callback => ajaxCall(json => callback(json));
+```
+
+```js title='Benefits of being Callable?' subtitle="Same Thing" 
+const getServerStuff = callback =>         const getServerStuff = ajaxCall
+  ajaxCall(json => callback(json))       
+```
+
+```js 5 title='What should numbers be?'
+                    const numbers = [1, 2, 3]
+
+                    double(numbers)
+
+                    numbers // ?
+```
+
+```js 3 title='What should numbers be?' subtitle="Is double a function?"
+                    const numbers = [1, 2, 3]
+
+                    double(numbers)
+
+                    numbers // ?
+```
+
+```markdown title='Pure Function'
+  Given the same input, will always return the same output.
+  Produces no side effects.
+```
+ 
+```markdown title='Side Effects'
+  Any application state change that is observable outside the called function
+  (other than its return value)
+```
+
+```js 9 title='The case for purity' subtitle="Was erwarten wir?" file=./codesnipets/caseForPurity2.js
+```
+
+```js 4 title='Impurity giveaway' subtitle='Funktionen deren return Value nicht benutzt wird'
+  
+                            var counter = 1
+
+                            incrementCounter()
+
+                            console.log(counter) // 2  
+```
+
+```md title='Dealing with Impurity ✞'
+  
+   - Using Immutable Data structures by:
+     - Using Libraries: Immutable.js, ImmerJs, Ramda
+     - Avoiding Certain Methods (splice, pop, push, shift, unshift, foreach, u.a) 
+     - Using Pure Methods (slice, concat, filter, map, reduce u.a)
+     - Freezing Objects, Copying, Spreading, 
+     - Using Lenses (functional getters/setters)
+
+   - Extracting Impurity
+
+   - Containing Impurity
 ```
 
 </CodeSurfer>
@@ -92,15 +177,27 @@ export const theme = vsDark;
 
 </Step>
 
-<Step title="Contain Impurity">
+<Step title="Extract Impurity">
 
-```js file=./codesnipets/daysThisMonthImpure.js
+```js file=./codesnipets/addCommentImpure.js
 ```
 
-```js file=./codesnipets/daysThisMonthPure.js
+```js
+`
 ```
 
 </Step>
+
+<Step title="Extract Impurity">
+
+```js file=./codesnipets/addCommentImpure.js
+```
+
+```js file=./codesnipets/addCommentPure.js
+```
+
+</Step>
+
 
 </CodeSurferColumns>
 
@@ -111,50 +208,6 @@ export const theme = vsDark;
 <Step>
 
 ```js 3 file=./codesnipets/firstClassFunctions.js title='First Class Citizens' subtitle='Can be arguments to other functions'
-```
-
-</Step>
-
-<Step>
-
-```js 5 file=./codesnipets/firstClassFunctions.js title='First Class Citizens' subtitle='Can be returned from other functions'
-```
-
-</Step>
-
-<Step>
-
-```js file=./codesnipets/firstClassFunctions.js title='First Class Citizens' subtitle='Returning them as Arguments'
-```
-
-</Step>
-
-<Step>
-
-```js 3 file=./codesnipets/firstClassFunctions.js title='First Class Functions' subtitle='Können wie andere Datatypen behandelt werden'
-```
-
-</Step>
-
-<Step>
-
-```js 5 file=./codesnipets/firstClassFunctions.js title='First Class Functions' subtitle='Können wie andere Datatypen behandelt werden'
-```
-
-</Step>
-
-<Step>
-
-```js 7 file=./codesnipets/firstClassFunctions.js title='First Class Functions' subtitle='Können wie andere Datatypen behandelt werden'
-```
-
-</Step>
-
-<Step>
-
-```markdown title='Pure Function'
-  Given the same input, will always return the same output.
-  Produces no side effects.
 ```
 
 </Step>
