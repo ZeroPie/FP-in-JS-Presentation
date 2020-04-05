@@ -7,136 +7,121 @@ import { github, vsDark } from "@code-surfer/themes";
 
 export const theme = vsDark;
 
-# FP 👋
+---
+
+<CodeSurfer>
+
+```js file=./codesnipets/sayHiToFob.js
+```
+
+```markdown
+                1. Functions
+                2. Side Effects
+                3. Pure Functions
+                4. Will it blend?
+                5. Purity
+                6. Not all Array Methods are created equal
+                7. Currying 🍛
+                8. Composition
+                9. Partial Aplication
+                10. Chaining
+                11. The holy Trio
+                12. Reduce all the things
+                13. Transducing
+```
+
+```markdown title='Functional Programming'
+  The process of building software by composing pure functions.
+  avoiding shared state, mutable data, and side-effects
+```
+
+</CodeSurfer>
 
 ---
 
 <CodeSurfer>
 
-```js file=./codesnipets/sayHi.js
 
+```js title='Was ist eine Funktion?'
+  A function is a process that maps the domain to the range (ok...)
 ```
 
-```markdown title='Functional Programming'
-The process of building software by composing pure functions.
-avoiding shared state, mutable data, and side-effects 
-```
-
-```js file=./codesnipets/firstClassFunctions.js title='First Class Functions' subtitle='Können wie andere Datatypen behandelt werden'
-
-```
-
-```js 1 file=./codesnipets/firstClassFunctions.js title='First Class Functions' subtitle='Können wie andere Datatypen behandelt werden'
-
-```
-
-```js 3 file=./codesnipets/firstClassFunctions.js title='First Class Functions' subtitle='Können wie andere Datatypen behandelt werden'
-
-```
-
-```js 5 file=./codesnipets/firstClassFunctions.js title='First Class Functions' subtitle='Können wie andere Datatypen behandelt werden'
-
-```
-
-```js 7 file=./codesnipets/firstClassFunctions.js title='First Class Functions' subtitle='Können wie andere Datatypen behandelt werden'
-
-```
-
-```js title='Functions sind callable' 
-  const hi = name => `Hi ${name}`
-```
-
-```js title='Functions sind callable'   
-  const hi = name => `Hi ${name}`
-  const greet = name => hi(name)
-```
-
-```js title='Functions sind callable' subtitle="Same Thing"  
-  const hi = name => `Hi ${name}`
-  const greet = name => hi(name)           const greet = hi
-```
-
-```js
-const getServerStuff = callback => ajaxCall(json => callback(json));
-```
-
-```js subtitle="Same Thing" 
-const getServerStuff = callback => 
-  ajaxCall(json => callback(json))       const getServerStuff = ajaxCall;
-```
-
-```markdown title='Pure Function'
-  Given the same input, will always return the same output.
-  Produces no side effects.
-```
-
-```js
-
-Was ist eine Funktion?
-
-```
-
-```js title='We lie... a lot'
-
-                    Funktion         assoziation
-
-                    f(1) => 2        a(1) => 2
-                    f(2) => 4        a(1) => 4
-                    f(3) => 6        a(1) => 3
-
-```
-
-```markdown title='Side Effects'
-  Any application state change that is observable outside the called function 
-                  (other than its return value)
-```
-
-```js 4 title='Certainty' subtitle="Was erwarten wir"
-                    const numbers = [1, 2, 3]
-                    double(numbers)
-
-                    numbers // = ?
-```
-
-```js 9 title='Certainty' subtitle="Was erwarten wir?" file=./codesnipets/caseForPurity2.js title=Purity title='Certainty'
-```
-
-```js 4 title='Impurity giveaway' subtitle='Funktionen deren return Value nicht benutzt wird'
+```js title='Was ist eine Funktion?' subtitle='Deftones - Back to School.mp3:'
+  In other Words:
+  A Function associates to each Element of a set of X a single element of a set Y.
   
-                            var counter = 1
+  y = f(x)
 
-                            incrementCounter()
+                      Funktion         Prozedur/Assoziation
 
-                            console.log(counter) // 2
-  
-```
-
-```js title='Is it Pure?'
-
-const buttonId = 'ms-button'
-
-const findButton = () => 
-  document.getElementById(buttonId)
+                      f(1) => 2           a(1) => 2
+                      f(2) => 4           a(1) => 4
+                      f(3) => 6           a(1) => 3`
 
 ```
 
-```js title='Is it Pure?'
-
-const findButton = buttonId => 
-  document.getElementById(buttonId)
-
+```md title='Functions in JS'
+    In Javascript: 
+    A set of statements that performs a task.
+    Functions are Objects and have properties and methods.
+    What distinguishes them from other objects is that functions can be called.
+    Functions are first class citizens 🧐
 ```
 
-```js title='Is it Pure?'
-
-const findButton = (buttonId, document) =>
-  document.getElementById(buttonId)
-  
+```js title='Functions sind callable' subtitle='All Devs: Thanks Mr. Obvious'
+    const hi = name => `Hi ${name}`
 ```
 
-```js
-Functional programming is declarative rather than imperative,
-and application state flows through pure functions.
+```js 2 title='Functions sind callable' subtitle='Mr. Obvious: Im Just saying this'
+    const hi = name => `Hi ${name}`
+    const greet = name => hi(name)
+```
+
+```js title='Functions sind callable' subtitle="and this is the same thing"  
+    const hi = name => `Hi ${name}`
+    const greet = name => hi(name)           const greet = hi
+```
+
+```js title='Functions sind callable' subtitle="What about this?"  
+    const getServerStuff = callback => ajaxCall(json => callback(json));
+```
+
+```js title='Functions sind callable' subtitle="Same Thing"   
+    const getServerStuff = callback => 
+    ajaxCall(json => callback(json))       const getServerStuff = ajaxCall;
+```
+
+```js title='Thats a fine thing'
+    const fetchResults = (endpoint, callback) => { ...  }
+    const renderResults = results => { ... }
+
+    fetchResults('autoscout/v2/autos?location=bonn', json => renderResults(json))
+```
+
+```js title='FetchResults has changed'
+    const fetchResults = (endpoint, callback) => { ... return callback(results, error) }
+    const renderResults = results => { ... }
+    
+    fetchResults('autoscout/v2/autos?location=bonn', json => renderResults(json))
+```
+
+
+```js title='FetchResults has changed'
+
+    const fetchResults = (endpoint, callback) => { ... return callback(results, error) }
+    
+    const renderResults = (results, error) => error ? error : results
+
+    fetchResults('autoscout/v2/autos?location=bonn', (json, error) => renderResults(json, error))
+```
+
+```js title='Less Code, less Changes, maybe less Bugs' subtilte='Point Free/Tacit Style: You don't specify arguments, functions are defined as products from other functions'
+
+    const fetchResults = (endpoint, callback) => { ... return callback(results, error) }
+    
+    const renderResults = (results, error) => error ? error : results
+
+    fetchResults('autoscout/v2/autos?location=bonn', renderResults)
 ```
 
 </CodeSurfer>
@@ -165,46 +150,87 @@ and application state flows through pure functions.
 
 </Step>
 
-<Step title="Extract Impurity">
+</CodeSurferColumns>
 
-```js file=./codesnipets/addCommentImpure.js
-```
+---
 
-```js
-`
-```
+<CodeSurferColumns sizes={[1,3,1]}>
 
-</Step>
+<Step>
 
-<Step title="Extract Impurity">
-
-```js file=./codesnipets/addCommentImpure.js
-```
-
-```js file=./codesnipets/addCommentPure.js
+```js 3 file=./codesnipets/firstClassFunctions.js title='First Class Citizens' subtitle='Can be arguments to other functions'
 ```
 
 </Step>
 
-<Step title="Methods make a difference" subtitle='Mutation'>
+<Step>
 
-```js 4[18:22] file=./codesnipets/doubleitems.js
-```
-
-```js
-`
+```js 5 file=./codesnipets/firstClassFunctions.js title='First Class Citizens' subtitle='Can be returned from other functions'
 ```
 
 </Step>
 
-<Step title="Methods make a difference" subtitle='Be declarative and use pure methods'>
+<Step>
 
-```js file=./codesnipets/doubleitems.js
-    arr.map(x => x * 2)
+```js file=./codesnipets/firstClassFunctions.js title='First Class Citizens' subtitle='Returning them as Arguments'
 ```
 
-```js 
-    arr.map(x => x * 2)
+</Step>
+
+<Step>
+
+```js 3 file=./codesnipets/firstClassFunctions.js title='First Class Functions' subtitle='Können wie andere Datatypen behandelt werden'
+```
+
+</Step>
+
+<Step>
+
+```js 5 file=./codesnipets/firstClassFunctions.js title='First Class Functions' subtitle='Können wie andere Datatypen behandelt werden'
+```
+
+</Step>
+
+<Step>
+
+```js 7 file=./codesnipets/firstClassFunctions.js title='First Class Functions' subtitle='Können wie andere Datatypen behandelt werden'
+```
+
+</Step>
+
+<Step>
+
+```markdown title='Pure Function'
+  Given the same input, will always return the same output.
+  Produces no side effects.
+```
+
+</Step>
+
+</CodeSurferColumns>
+
+---
+
+<CodeSurferColumns sizes={[1,3,1]}>
+
+<Step>
+
+```js title="Class"
+```
+
+<div>
+
+I can write
+
+- some
+- markdown
+- here
+
+Or use a component...
+
+</div>
+
+```js title="Function"
 ```
 
 </Step>
@@ -214,266 +240,6 @@ and application state flows through pure functions.
 ---
 
 <CodeSurferColumns>
-
-<Step title="Array Methods">
-
-```js title='Impure'
-splice()
-pop()
-push()
-shift()
-unshift()
-```
-
-```js
-slice() 🍕
-concat()
-filter()
-map()
-reduce()
-```
-
-</Step>
-
-<Step title="Array Methods">
-
-```js title='Impure'
-splice()
-
-const pizzaArr = [0,1,2,3]  // const ¯\_( ツ )_/¯
-slices.splice(0,2)
-pizzaArr // [🍕. 🍕, 🍕] 
-
-pop()
-push()
-shift()
-unshift()
-```
-
-```js
-slice() 🍕
-
-const arr1 = [🍕, 🍕, 🍕, 🍕, 🍕];
-const arr2 = arr1.slice(0, 2) // [🍕. 🍕, 🍕]
-
-concat()
-filter()
-map()
-reduce()
-```
-
-</Step>
-
-<Step title="Array Methods">
-
-```js title='Impure'
-splice()
-pop()
-
-const fruits = [🍏, 🍑, 🍒]
-fruits.pop()
-
-push()
-shift()
-unshift()
-```
-
-```js
-slice() 🍕
-
-const fruits = [🍏, 🍑, 🍒]
-const poppedFruits = fruits.slice(0, -1)
-
-concat()
-filter()
-map()
-reduce()
-```
-
-</Step>
-
-<Step title="Array Methods">
-
-```js title='Impure'
-splice()
-pop()
-push()
-
-const arr = [1,2]
-arr.push(3)
-
-shift()
-unshift()
-```
-
-```js
-slice() 🍕
-concat()
-
-const arr = [1,2]
-const arr2 = arr1.concat[3]
-
-filter()
-map()
-reduce()
-```
-
-</Step>
-
-<Step title="Array Methods">
-
-```js title='Impure'
-splice()
-pop()
-push()
-
-const arr = [1,2]
-arr.push(3)
-
-shift()
-unshift()
-```
-
-```js
-slice() 🍕
-concat()
-...spread operator
-const arr1 = [1,2]
-const arr2 = [...arr1, 3]
-
-filter()
-map()
-reduce()
-
-```
-
-</Step>
-
-<Step title="Array Methods">
-
-```js title='Impure'
-splice()
-pop()
-push()
-shift()
-
-const arr = [1,2,3]
-const firstEle = arr.shift()  // 1, [2,3]
-
-unshift()
-```
-
-```js
-slice() 🍕
-const arr1 = [1,2,3]
-const arr2 = arr.slice(1)
-
-concat()
-filter()
-map()
-reduce()
-
-```
-
-</Step>
-
-<Step title="Array Methods">
-
-```js
-splice()
-pop()
-push()
-shift()
-unshift()
-
-const arr = [1,2,3]
-const arrLenght = arr.unshit(-1, 0) // 5 , [0,-1,1,2,3]
-
-```
-
-```js
-slice() 🍕
-concat()
-filter()
-map()
-reduce()
-
-...spread operator
-const arr = [1,2,3]
-const newArr = [ -1, 0,...arr]
-const arrLenght = newArr.length
-
-```
-
-</Step>
-
-<Step title="[].map">
-
-```js
-Die map() Methode wendet auf jedes Element des Arrays 
-die bereitgestellte Funktion an 
-und gibt das Ergebnis in einem neuen Array zurück.
-
-
-arr.map(x => x * 2)
-```
-
-```js
-`
-```
-
-</Step>
-
-<Step>
-
-```js file=./codesnipets/doubleitems.js
-```
-
-```js
-const doubleNumber = v => v * 2
-const doubled = arr.map(doubleNumber)
-```
-
-</Step>
-
-</CodeSurferColumns>  
-
----
-
-<CodeSurferColumns>
-
-<Step title="Currying 🍛" subtitle="Von Multiple Arguments zu eine Funktion die weniger arguments animmt">
-
-```js
-const arr = [1,1,1,1]
-
-const multiplyBy = (factor, number) 
-  => number 
-  => factor * number
-
-const double = multiplyBy(2)
-const triple = multiplyBy(3)
-
-arr.map(double)
-```
-
-```js
-
-const arr = [1,1,1,1]
-
-var multiplyBy = function multiplyBy(factor, number) {
-  return function (number) {
-    return factor * number
-  }
-}
-
-const double = multiplyBy(2)
-const triple = multiplyBy(3)
-
-arr.map(double)
-```
-
-</Step>
 
 <Step title="Currying 🍛">
 
@@ -495,219 +261,101 @@ arr.map(double)
 
 </Step>
 
-<Step title="Currying 🍛">
 
-``` js 5 file=./codesnipets/curryESNext.js
-```
-
-```js 5 file=./codesnipets/curryES15.js
-```
-
-</Step>
-
-<Step title="Currying 🍛" subtitle='Partial Application'>
-
-``` js 7 file=./codesnipets/curryESNext.js
-```
-
-```js 9 file=./codesnipets/curryES15.js
-```
-
-</Step>
-
-<Step title="Currying 🍛" subtitle='Partial Application'>
-
-``` js 8 file=./codesnipets/curryESNext.js
-```
-
-```js 10 file=./codesnipets/curryES15.js
-```
-
-</Step>
-
-<Step title="Currying 🍛" subtitle='Partial Application'>
-
-``` js 8 file=./codesnipets/curryESNext.js
-```
-
-```js 10 file=./codesnipets/curryES15.js
-```
-
-</Step>
-
-<Step title="Currying 🍛" subtitle='Partial Application'>
-
-``` js 10:12 file=./codesnipets/curryESNext.js
-```
-
-```js 12:14 file=./codesnipets/curryES15.js
-```
-
-</Step>
-
-<Step title="Currying 🍛" subtitle="Composition: Output einer Function als Input einer anderen nehmen">
-
-```js 2
-const doubleAndTriple = x 
-  => double(triple(x))
-
-arr.map(doubleAndTriple)
-```
-
-```js 2
-var doubleAndTriple = function doubleAndTriple(x) {
-  return double(triple(x));
-};
-
-arr.map(doubleAndTriple)
-```
-
-</Step>
-
-<Step title="Currying 🍛" subtitle="Composition">
-
-```js 
-const doubleAndTriple = x => double(triple(x))
-
-arr.map(doubleAndTriple)
-```
-
-```js
-var doubleAndTriple = function doubleAndTriple(x) {
-  return double(triple(x));
-};
-
-arr.map(doubleAndTriple)
-```
-
-</Step>
-
-<Step title="Composition" subtitle="sieht nicht mehr so lecker aus">
-
-```js 
-const tripleAdd3DivBy5 = x => divBy5(add2(triple(x)))
-```
-
-```js
-var tripleAdd3DivBy5 = function tripleAdd3DivBy5(x) {
-  return divBy5(add2(triple(x)))
-}
-```
-
-</Step>
-
-<Step title="Composition">
-
-```js 
-const compose = (f1, f2) => f1 => f2(f1)
-const add2Andtriple = compose(add2, triple)
-const tripleAdd3DivBy5 = x => divBy5(add2Andtriple(x))
-```
-
-```js
-var compose = function compose(f1, f2) {
-  return function (f1) {
-    return f2(f1);
-  };
-};
-
-var add2Andtriple = compose(add2, triple);
-
-var tripleAdd3DivBy5 = function tripleAdd3DivBy5(x) {
-  return divBy5(add2Andtriple(x));
-}
-```
-
-</Step>
-
-<Step title="Composition">
-
-```js 
-const compose = (f1, f2, f3) 
-  => (f1,f2)
-  => f3(f2(f1))
-
-const tripleAdd3DivBy5 = compose(divBy5, add2, triple)
-
-arr.map(tripleAdd3DivBy5)
-```
-
-```js
-var compose = function compose(f1, f2, f3) {
-  return function (f1, f2) {
-    return f3(f2(f1));
-  };
-};
-
-var tripleAdd3DivBy5 = compose(divBy5, add2, triple);
-arr.map(tripleAdd3DivBy5)
-```
-
-</Step>
-
-<Step title="Composition">
-
-```js 
-const compose = (...functions) 
-  => args 
-  => functions.reduceRight((arg, fn) => fn(arg), args);
-```
-
-```js
-var compose = function compose() {
-  for (var _len = arguments.length, functions = new Array(_len), _key = 0; _key < _len; _key++) {
-    functions[_key] = arguments[_key];
-  }
-
-  return function (args) {
-    return functions.reduceRight(function (arg, fn) {
-      return fn(arg);
-    }, args);
-  };
-};
-```
-
-</Step>
-
-<Step title="Composition">
-
-```js 
-const pipe = (...functions) 
-  => args 
-  => functions.reduce((arg, fn) => fn(arg), args);
-```
-
-```js
-
-var pipe = function pipe() {
-  for (var _len = arguments.length, functions = new Array(_len), _key = 0; _key < _len; _key++) {
-    functions[_key] = arguments[_key];
-  }
-
-  return function (args) {
-    return functions.reduce(function (arg, fn) {
-      return fn(arg);
-    }, args);
-  };
-};
-
-```
-</Step>
-
-<Step title="Composition">
-
-```js 
-const tripleAdd3DivBy5 = compose(divBy5,add2,triple)
-```
-
-```js
- const tripleAdd3DivBy5 = pipe(triple,add2,divBy5)
-```
-</Step>
-
-
-</CodeSurferColumns>
+</CodeSurferColumns>  
 
 ---
 
-[FP Roadmap:](https://hub.packtpub.com/a-five-level-learning-roadmap-for-functional-programmers/)
+<CodeSurferColumns> 
+
+
+<Step title="Reduce"> 
+
+```md
+## The Swiss Knife!
+
+arr.reduce(callback( accumulator, currentValue[, index[, array]] )[, initialValue])
+
+```
+
+</Step>
+
+<Step title="Reduce"> 
+
+```md
+## The Swiss Knife!
+
+arr.reduce(callback( accumulator, currentValue[, index[, array]] )[, initialValue])
+
+Ez right? Nah, not so evident! examples
+
+```
+
+</Step>
+
+<Step title="Reduce" subtitle="The Swiss Knife"> 
+
+``` js 
+  const initialValue = 10
+  const sodexosUsed = [1,1,1,1]
+
+  const sodexosLeft = sodexosUsed.reduce((accumulator, currentValue) => accumulator - currentValue, initialValue)
+```
+
+</Step>
+
+<Step title="Reduce" subtitle="Extracted to a reducer"> 
+
+``` js 
+  const initialValue = 10
+  const sodexosUsed = [1,1,1,1]
+  const sodexosReducer = (accumulator, currentValue) => accumulator - currentValue
+
+  const sodexosLeft = sodexosUsed.reduce(sodexosReducer, initialValue)
+
+```
+
+</Step>
+
+
+<Step title="Reduce" subtitle="Extracted to a reducer"> 
+
+``` js 
+  const initialValue = 10
+  const sodexosUsed = [1,1,1,1]
+  const sodexosReducer = (accumulator, currentValue) => accumulator - currentValue
+
+  const sodexosLeft = sodexosUsed.reduce(sodexosReducer, initialValue)
+
+```
+
+</Step>
+
+<Step title="Reduce"> 
+
+``` md
+  But it looks crazy
+  Whats the point?
+```
+
+</Step>
+
+<Step title="Reduce"> 
+
+``` md
+  You can transform Data in a lot of ways!
+  You can implement other functions such as map and filter, flatMap and others!
+  Examples:
+```
+
+</Step>
+
+<Step title="The Holy Trio"> 
+
+``` js 
+  reduce, filter, map
+```
+
+</Step>
+
+</CodeSurferColumns>

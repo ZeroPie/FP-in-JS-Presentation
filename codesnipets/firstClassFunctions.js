@@ -1,7 +1,11 @@
-const greet = name => hi
+const sayHiTo = name => `Hi ${name}`
 
-const arr = [greet]
+map(sayHiTo)
 
-const yellGreeting = yell(greet)
+const bidFarewellTo = name => `Bye ${name}`
 
-greetings = { greet, yellGreeting }
+const greet = name => hiTo
+
+const greetings = [ greet, bidFarewellTo ]
+
+const greeTingsObj = { ...greetings }
