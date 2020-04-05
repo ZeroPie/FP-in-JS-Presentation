@@ -1,12 +1,10 @@
-const sayHiTo = name => `Hi ${name}`
+const fob = ['Wiebke', 'Lukas', 'Bianca', 'Sylwya', 'Vidyu',
+  'Marcel', 'Joel', 'Pascal', 'Dominik',
+  'Andre', 'Mark', 'Felix']
 
-const sayWordTo = (word, name) => `${word} ${name}`
+const sayWordTo = (word, name) =>
+  name => `${word} ${name}`
 
-const sayByeToFob = sayWordTo('bye', 'fob')
+const sayHiTo = sayWordTo('Hi')
 
-const sayWordTo = (word, name) => name => `${word} ${name}`
-
-const sayByeTo = sayWordTo('Bye')
-const sayOiTo = sayOiTo('Oi')
-
-['Wiebke', 'Lukas', 'Bianca', 'Sylwya', 'Joel'].map(sayOiTo)
+fob.map(sayHiTo)

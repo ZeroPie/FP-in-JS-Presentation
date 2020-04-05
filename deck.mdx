@@ -13,17 +13,7 @@ export const theme = vsDark;
 
 <CodeSurfer>
 
-```js
-
-const fobPpl = ['Wiebke', 'Lukas', 'Bianca', 'Vidyu', 'Sylwya', 'Joel',
-'Dominik', 'Pascal', 'Marcel', 'Felix', 'Andre', 'Kathi']
-
-
-const sayWordTo = (word, name) => name => `${word} ${name}`
-
-const sayHiTo = sayWordTo('Hi')
-
-fobPpl.map(sayHiTo)
+```js file=./codesnipets/sayHi.js
 
 ```
 
@@ -156,6 +146,16 @@ and application state flows through pure functions.
 <CodeSurferColumns>
 
 <Step title="Extract Impurity">
+
+```js file=./codesnipets/daysThisMonthImpure.js
+```
+
+```js file=./codesnipets/daysThisMonthPure.js
+```
+
+</Step>
+
+<Step title="Contain Impurity">
 
 ```js file=./codesnipets/daysThisMonthImpure.js
 ```
