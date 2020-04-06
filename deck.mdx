@@ -18,7 +18,7 @@ export const theme = vsDark;
                 5. Currying 🍛
                 6. Composition
                 7. Partial Aplication
-                8. Reduce all the things
+                8. Example
 ```
 
 ```markdown title='Functional Programming'
@@ -89,6 +89,8 @@ const getServerStuff = callback =>         const getServerStuff = ajaxCall
 ```
 
 ```js 5 title='What should numbers be?'
+                    import { double }  from './shadyMath'
+                    
                     const numbers = [1, 2, 3]
 
                     double(numbers)
@@ -97,6 +99,8 @@ const getServerStuff = callback =>         const getServerStuff = ajaxCall
 ```
 
 ```js 3 title='What should numbers be?' subtitle="Is double a function?"
+                    import { double }  from './shadyMath'
+
                     const numbers = [1, 2, 3]
 
                     double(numbers)
@@ -428,7 +432,75 @@ const newArr = [ -1, 0,...arr]
 
 ---
 
+<CodeSurferColumns sizes={[1,1]}>
+
+<Step title="[].map">
+
+```js
+Die map() Methode wendet auf jedes Element des Arrays 
+die bereitgestellte Funktion an 
+und gibt das Ergebnis in einem neuen Array zurück.
+
+
+arr.map(x => x * 2)
+```
+
+```js
+```
+
+</Step>
+
+<Step>
+
+```js file=./codesnipets/doubleItemsForLoop.js
+```
+
+```js
+const doubleNumber = v => v * 2
+const doubled = arr.map(doubleNumber)
+```
+
+</Step>
+
+
+</CodeSurferColumns>
+
+---
+
 <CodeSurferColumns>
+
+<Step title="Currying 🍛" subtitle="Von Multiple Arguments zu eine Funktion die weniger arguments animmt">
+
+```js
+const arr = [1,1,1,1]
+
+const multiplyBy = (factor, number) 
+  => number 
+  => factor * number
+
+const double = multiplyBy(2)
+const triple = multiplyBy(3)
+
+arr.map(double)
+```
+
+```js
+
+const arr = [1,1,1,1]
+
+var multiplyBy = function multiplyBy(factor, number) {
+  return function (number) {
+    return factor * number
+  }
+}
+
+const double = multiplyBy(2)
+const triple = multiplyBy(3)
+
+arr.map(double)
+```
+
+</Step>
 
 <Step title="Currying 🍛">
 
@@ -450,18 +522,222 @@ const newArr = [ -1, 0,...arr]
 
 </Step>
 
+<Step title="Currying 🍛" subtitle='Partial Application'>
+
+``` js 7 file=./codesnipets/curryESNext.js
+```
+
+```js 9 file=./codesnipets/curryES15.js
+```
+
+</Step>
+
+<Step title="Currying 🍛" subtitle='Partial Application'>
+
+``` js 8 file=./codesnipets/curryESNext.js
+```
+
+```js 10 file=./codesnipets/curryES15.js
+```
+
+</Step>
+
+<Step title="Currying 🍛" subtitle='Partial Application'>
+
+``` js 8 file=./codesnipets/curryESNext.js
+```
+
+```js 10 file=./codesnipets/curryES15.js
+```
+
+</Step>
+
+<Step title="Currying 🍛" subtitle='Partial Application'>
+
+``` js 10:12 file=./codesnipets/curryESNext.js
+```
+
+```js 12:14 file=./codesnipets/curryES15.js
+```
+
+</Step>
+
+<Step title="Currying 🍛" subtitle="Composition: Output einer Function als Input einer anderen nehmen">
+
+```js 2
+const doubleAndTriple = x 
+  => double(triple(x))
+
+arr.map(doubleAndTriple)
+```
+
+```js 2
+var doubleAndTriple = function doubleAndTriple(x) {
+  return double(triple(x));
+};
+
+arr.map(doubleAndTriple)
+```
+
+</Step>
+
+<Step title="Composition" subtitle="sieht nicht mehr so lecker aus">
+
+```js 
+const tripleAdd3DivBy5 = x => divBy5(add2(triple(x)))
+```
+
+```js
+var tripleAdd3DivBy5 = function tripleAdd3DivBy5(x) {
+  return divBy5(add2(triple(x)))
+}
+```
+
+</Step>
 
 </CodeSurferColumns>  
 
 ---
 
-<CodeSurferColumns> 
+<CodeSurferColumns>
 
+<Step title="Composition Function">
+
+```js 
+const compose = (f1, f2) => f1 => f2(f1)
+const add2Andtriple = compose(add2, triple)
+const tripleAdd3DivBy5 = x => divBy5(add2Andtriple(x))
+```
+
+```js
+var compose = function compose(f1, f2) {
+  return function (f1) {
+    return f2(f1);
+  };
+};
+
+var add2Andtriple = compose(add2, triple);
+
+var tripleAdd3DivBy5 = function tripleAdd3DivBy5(x) {
+  return divBy5(add2Andtriple(x));
+}
+```
+
+</Step>
+
+<Step title="Composition Function">
+
+```js 
+const compose = (f1, f2, f3) 
+  => (f1,f2)
+  => f3(f2(f1))
+
+const tripleAdd3DivBy5 = compose(divBy5, add2, triple)
+
+arr.map(tripleAdd3DivBy5)
+```
+
+```js
+var compose = function compose(f1, f2, f3) {
+  return function (f1, f2) {
+    return f3(f2(f1));
+  };
+};
+
+var tripleAdd3DivBy5 = compose(divBy5, add2, triple);
+arr.map(tripleAdd3DivBy5)
+```
+
+</Step>
+
+<Step title="Composition">
+
+```js 
+const compose = (...functions) 
+  => args 
+  => functions.reduceRight((arg, fn) => fn(arg), args);
+```
+
+```js
+var compose = function compose() {
+  for (var _len = arguments.length, functions = new Array(_len), _key = 0; _key < _len; _key++) {
+    functions[_key] = arguments[_key];
+  }
+
+  return function (args) {
+    return functions.reduceRight(function (arg, fn) {
+      return fn(arg);
+    }, args);
+  };
+};
+```
+
+</Step>
+
+<Step title="Switch it up a little we have Pipe">
+
+```js 
+const pipe = (...functions) 
+  => args 
+  => functions.reduce((arg, fn) => fn(arg), args);
+```
+
+```js
+
+var pipe = function pipe() {
+  for (var _len = arguments.length, functions = new Array(_len), _key = 0; _key < _len; _key++) {
+    functions[_key] = arguments[_key];
+  }
+
+  return function (args) {
+    return functions.reduce(function (arg, fn) {
+      return fn(arg);
+    }, args);
+  };
+};
+
+```
+</Step>
+
+<Step title="Composing with Pipe">
+
+```js 
+const tripleAdd3DivBy5 = compose(divBy5,add2,triple)
+```
+
+```js
+ const tripleAdd3DivBy5 = pipe(triple,add2,divBy5)
+```
+</Step>
+
+<Step> 
+
+```
+Benefits:
+
+ - Weniger Bugs 
+ - Parallelism
+ - Modularity
+ - Testability
+ - Lazy Evaluation
+ - Easier to read (Takes time getting used to it)
+
+ example: https://github.com/ZeroPie/changelog
+
+```
+
+</Step>
+
+</CodeSurferColumns>
+
+---
+
+<CodeSurferColumns> 
 
 <Step title="Reduce"> 
 
-```md
-## The Swiss Knife!
+```js
+Like a Swiss Knife!
 
 arr.reduce(callback( accumulator, currentValue[, index[, array]] )[, initialValue])
 
@@ -471,8 +747,11 @@ arr.reduce(callback( accumulator, currentValue[, index[, array]] )[, initialValu
 
 <Step title="Reduce"> 
 
-```md
-## The Swiss Knife!
+```js
+  Like a Swiss Knife.
+  Can transform Data in a lot of ways
+  You can implement other functions such as map and filter, flatMap and others!
+  Sometimes called Fold
 
 arr.reduce(callback( accumulator, currentValue[, index[, array]] )[, initialValue])
 
@@ -519,49 +798,5 @@ Ez right? Nah, not so evident! examples
 ```
 
 </Step>
-
-<Step title="Reduce"> 
-
-``` md
-  But it looks crazy
-  Whats the point?
-```
-
-</Step>
-
-<Step title="Reduce"> 
-
-``` md
-  You can transform Data in a lot of ways!
-  You can implement other functions such as map and filter, flatMap and others!
-```
-
-</Step>
-
-<Step> 
-
-```
-Benefits:
-
- - Weniger Bugs 
- - Parallelism
- - Modularity
- - Testability
- - Lazy Evaluation
-
-```
-
-</Step>
-
-<Step> 
-
-```
- [FP Roadmap:](https://hub.packtpub.com/a-five-level-learning-roadmap-for-functional-programmers/)
-```
-
-</Step>
-
-
-
 
 </CodeSurferColumns>
