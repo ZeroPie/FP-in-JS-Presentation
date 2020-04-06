@@ -1,0 +1,1 @@
+const doubleItems = arr => arr.map(v => v * 2)

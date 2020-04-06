@@ -156,9 +156,7 @@ const getServerStuff = callback =>         const getServerStuff = ajaxCall
      - Freezing Objects, Copying, Spreading, 
      - Using Lenses (functional getters/setters)
 
-   - Extracting Impurity
-
-   - Containing Impurity
+   - Extracting and Containing Impurity
 ```
 
 </CodeSurfer>
@@ -203,11 +201,46 @@ const getServerStuff = callback =>         const getServerStuff = ajaxCall
 
 ---
 
-<CodeSurferColumns sizes={[1,3,1]}>
+<CodeSurferColumns sizes={[1,1]}>
 
-<Step>
+<Step title="Flow Statements make a difference" subtitle='Mutation in for Loops'>
 
-```js 3 file=./codesnipets/firstClassFunctions.js title='First Class Citizens' subtitle='Can be arguments to other functions'
+```js file=./codesnipets/doubleItemsForLoop.js
+```
+
+```js
+```
+
+</Step>
+
+<Step title="Methods make a difference">
+
+```js 6[18:21] file=./codesnipets/doubleItemsForLoopV2.js
+```
+
+```js
+''
+```
+
+</Step>
+
+<Step title="Methods make a difference" subtitle='This can happen'>
+
+```js 8,14 file=./codesnipets/doubleItemsMutate.js
+```
+
+```js
+''
+```
+
+</Step>
+
+<Step title="Methods make a Difference" subtitle='Be declarative and use pure methods'>
+
+```js 8,14 file=./codesnipets/doubleItemsMutate.js
+```
+
+```js file=./codesnipets/doubleItemsMap.js
 ```
 
 </Step>

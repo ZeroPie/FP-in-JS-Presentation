@@ -5,13 +5,10 @@ function doubleItems(arr) {
   for (let i = 0; i < arr.length; i++) {
     doubledItems.push(arr[i] * 2)
   }
-  arr.push(🐛)
   return doubledItems
 }
 
 let newArr = doubleItems(arr)
 
-arr // [1,1,🐛]
+arr    // [1,1]
 newArr // [2,2]
-
-
