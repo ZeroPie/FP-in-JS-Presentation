@@ -12,102 +12,12 @@ export const theme = vsDark;
 
 <CodeSurferColumns>
 
-<Step title="Composition">
-
-```js 
-const compose = (f1, f2) => f1 => f2(f1)
-const add2Andtriple = compose(add2, triple)
-const tripleAdd3DivBy5 = x => divBy5(add2Andtriple(x))
-```
-
-```js
-var compose = function compose(f1, f2) {
-  return function (f1) {
-    return f2(f1);
-  };
-};
-
-var add2Andtriple = compose(add2, triple);
-
-var tripleAdd3DivBy5 = function tripleAdd3DivBy5(x) {
-  return divBy5(add2Andtriple(x));
-}
-```
-
-</Step>
-
-<Step title="Composition">
-
-```js 
-const compose = (f1, f2, f3) 
-  => (f1,f2)
-  => f3(f2(f1))
-
-const tripleAdd3DivBy5 = compose(divBy5, add2, triple)
-
-arr.map(tripleAdd3DivBy5)
-```
-
-```js
-var compose = function compose(f1, f2, f3) {
-  return function (f1, f2) {
-    return f3(f2(f1));
-  };
-};
-
-var tripleAdd3DivBy5 = compose(divBy5, add2, triple);
-arr.map(tripleAdd3DivBy5)
-```
-
-</Step>
-
-<Step title="Composition">
-
-```js 
-const compose = (...functions) 
-  => args 
-  => functions.reduceRight((arg, fn) => fn(arg), args);
-```
-
-```js
-var compose = function compose() {
-  for (var _len = arguments.length, functions = new Array(_len), _key = 0; _key < _len; _key++) {
-    functions[_key] = arguments[_key];
-  }
-
-  return function (args) {
-    return functions.reduceRight(function (arg, fn) {
-      return fn(arg);
-    }, args);
-  };
-};
-```
-
-</Step>
-
-<Step title="Composition">
-
-```js 
-const pipe = (...functions) 
-  => args 
-  => functions.reduce((arg, fn) => fn(arg), args);
-```
-
-```js
-
-var pipe = function pipe() {
-  for (var _len = arguments.length, functions = new Array(_len), _key = 0; _key < _len; _key++) {
-    functions[_key] = arguments[_key];
-  }
-
-  return function (args) {
-    return functions.reduce(function (arg, fn) {
-      return fn(arg);
-    }, args);
-  };
-};
+<Step> 
 
 ```
+ [FP Roadmap:](https://hub.packtpub.com/a-five-level-learning-roadmap-for-functional-programmers/)
+```
+
 </Step>
 
 <Step title="Composition">

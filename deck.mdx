@@ -40,17 +40,10 @@ export const theme = vsDark;
   f(3) = 6
 ```
 
-```md title='Functions in JS'
-
-    A subprogram of type Function with properties and methods
-    
-    Functions sind "first class citizens" 🧐
-```
-
 ```js title='Function in JS'
     Object of type Function with properties and methods
 
-    Subprograms with params, bodies and return values  // obvious...
+    Subprograms with params, bodies and return values  // etc ..
     
     Functions sind "first class citizens" 🧐 // Fun!
 ```
@@ -88,22 +81,22 @@ const getServerStuff = callback =>         const getServerStuff = ajaxCall
   ajaxCall(json => callback(json))       
 ```
 
-```js 5 title='What should numbers be?'
-                    import { double }  from './shadyMath'
-                    
-                    const numbers = [1, 2, 3]
-
-                    double(numbers)
-
-                    numbers // ?
+```js title='Benefits of being Callable' subtitle="Not using the benefits" 
+  httpGet('/post/2', json => renderPost(json));
 ```
 
-```js 3 title='What should numbers be?' subtitle="Is double a function?"
-                    import { double }  from './shadyMath'
+```js title='Benefits of being Callable' subtitle="We have to refactor and add error" 
+  httpGet('/post/2', (json, err) => renderPost(json, err));
+```
 
+```js title='Benefits of being Callable' subtitle="We don't need to change much"
+  httpGet('/post/2', renderPost);
+```
+
+```js 3,5 title='Certainty' subtitle='What should numbers be? Is double a function?'
                     const numbers = [1, 2, 3]
 
-                    double(numbers)
+                    doubleStuff(numbers)
 
                     numbers // ?
 ```
@@ -471,43 +464,10 @@ const doubled = arr.map(doubleNumber)
 
 <Step title="Currying 🍛" subtitle="Von Multiple Arguments zu eine Funktion die weniger arguments animmt">
 
-```js
-const arr = [1,1,1,1]
-
-const multiplyBy = (factor, number) 
-  => number 
-  => factor * number
-
-const double = multiplyBy(2)
-const triple = multiplyBy(3)
-
-arr.map(double)
+``` js 3,4 file=./codesnipets/curryESNext.js
 ```
 
-```js
-
-const arr = [1,1,1,1]
-
-var multiplyBy = function multiplyBy(factor, number) {
-  return function (number) {
-    return factor * number
-  }
-}
-
-const double = multiplyBy(2)
-const triple = multiplyBy(3)
-
-arr.map(double)
-```
-
-</Step>
-
-<Step title="Currying 🍛">
-
-``` js 3 file=./codesnipets/curryESNext.js
-```
-
-```js 3 file=./codesnipets/curryES15.js
+```js 5,6 file=./codesnipets/curryES15.js
 ```
 
 </Step>
@@ -737,7 +697,6 @@ Benefits:
 <Step title="Reduce"> 
 
 ```js
-Like a Swiss Knife!
 
 arr.reduce(callback( accumulator, currentValue[, index[, array]] )[, initialValue])
 
