@@ -1,11 +1,14 @@
-const addComment = authorId, text => {
+const addComment = (authorId, text) => {
   let comment = {
     id: genUniqueId(),
     authorId,
-    text
+    text,
   }
-  cont ele = createCommentElement(comment)
+  const ele = createCommentElement(comment)
   commentsList.appendChild(ele)
 }
 
-addComment(130918, "Millionen deutschen werden reich mit diesem Trick")
+addComment(
+  130918,
+  "Millionen deutschen werden reich mit diesem Trick"
+)
