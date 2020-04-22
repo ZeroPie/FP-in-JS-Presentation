@@ -23,32 +23,31 @@ export const theme = vsDark;
 
 ```markdown title='Functional Programming'
   
-  - The process of building software by composing pure functions, 
-  avoiding shared state, mutable data, and side effects.
-
-  - Lego mit Funktionen
+     The process of building software by composing pure functions
+          avoiding shared state, mutable data and side effects.
 ```
 
-```md title='Was ist eine Funktion?' subtitle='Deftones - Back to School.mp3:'
+```md title='What is a Function?' subtitle='Deftones - Back to School.mp3'
 
-  A Function is a process that maps the domain to the range... ok...
+  A Function is a process that maps the domain to the range.
   
-  y = f(x * 2)
+            y = f(x * 2)
   
-  f(1) = 2           
-  f(2) = 4           
-  f(3) = 6
+                f(1) = 2           
+                f(2) = 4           
+                f(3) = 6
 ```
 
-```js title='Function in JS'
-    Object of type Function with properties and methods
-
-    Subprograms with params, bodies and return values  // etc ..
+```js title='What is a Function in JS?'
     
-    Functions sind "first class citizens" 🧐 // Fun!
+    An Object of type Function with properties and methods.
+
+    Can have params, a body and a return value.
+    
+    Functions are "first class citizens" 🧐 
 ```
 
-```js 1 file=./codesnipets/firstClassFunctions.js title='First Class Citizens?' subtitle='Assigned to Variables'
+```js 1 file=./codesnipets/firstClassFunctions.js title='First Class Citizens 🧐?' subtitle='Assigned to Variables'
 ```
 
 ```js 3 file=./codesnipets/firstClassFunctions.js title='First Class Functions' subtitle='Used as arguments'
@@ -60,20 +59,20 @@ export const theme = vsDark;
 ```js 7 file=./codesnipets/firstClassFunctions.js title='First Class Functions' subtitle='Stored in objects'
 ```
 
-```js title='Functions sind callable'   
+```js title='Functions are Callable'   
   const hi = name => `Hi ${name}`
 
   const greet = name => hi(name)
 ```
 
-```js title='Functions sind callable' subtitle="Same Thing"  
+```js title='Functions are Callable' subtitle="Same Thing"  
   const hi = name => `Hi ${name}`
 
   const greet = name => hi(name)           const greet = hi
 ```
 
 ```js title='Benefits of being Callable?'
-const getServerStuff = callback => ajaxCall(json => callback(json));
+const getServerStuff = callback => ajaxCall(json => callback(json))
 ```
 
 ```js title='Benefits of being Callable?' subtitle="Same Thing" 
@@ -81,16 +80,20 @@ const getServerStuff = callback =>         const getServerStuff = ajaxCall
   ajaxCall(json => callback(json))       
 ```
 
-```js title='Benefits of being Callable' subtitle="Not using the benefits" 
-  httpGet('/post/2', json => renderPost(json));
+```js 9 file=./codesnipets/fetchUserGithub.js title='Benefits of being Callable?' subtitle="Friend without benefits"
+  
 ```
 
-```js title='Benefits of being Callable' subtitle="We have to refactor and add error" 
-  httpGet('/post/2', (json, err) => renderPost(json, err));
+```js file=./codesnipets/fetchUserGithub2.js title='Benefits of being Callable?' subtitle="Friend without benefits"
+  
 ```
 
-```js title='Benefits of being Callable' subtitle="We don't need to change much"
-  httpGet('/post/2', renderPost);
+```js file=./codesnipets/fetchUserGithub3.js title='Benefits of being Callable?' subtitle="Friend without benefits"
+  
+```
+
+```js file=./codesnipets/fetchUserGithub4.js title='Benefits of being Callable' subtitle="Friend with benefits"
+  
 ```
 
 ```js 3,5 title='Certainty' subtitle='What should numbers be? Is double a function?'
@@ -102,19 +105,19 @@ const getServerStuff = callback =>         const getServerStuff = ajaxCall
 ```
 
 ```markdown title='Pure Function'
-  Given the same input, will always return the same output.
-  Produces no side effects.
+   Given the same input, will always return the same output.
+   Produces no side effects.
 ```
  
 ```markdown title='Side Effects'
-  Any application state change that is observable outside the called function
+  Any application state change that is observable outside the called function 
   (other than its return value)
 ```
 
-```js 9 title='The case for purity' subtitle="Was erwarten wir?" file=./codesnipets/caseForPurity2.js
+```js 9 title='The case for purity' subtitle="What do you expect?" file=./codesnipets/caseForPurity2.js
 ```
 
-```js 4 title='Impurity giveaway' subtitle='Funktionen deren return Value nicht benutzt wird'
+```js 4 title='Impurity giveaway' subtitle='No return value'
   
                             var counter = 1
 
@@ -123,16 +126,24 @@ const getServerStuff = callback =>         const getServerStuff = ajaxCall
                             console.log(counter) // 2  
 ```
 
-```md title='Dealing with Impurity ✞'
+```md title='Impurity Protection ✞'
   
-   - Using Immutable Data structures by:
-     - Using Libraries: Immutable.js, ImmerJs, Ramda
-     - Avoiding Certain Methods (splice, pop, push, shift, unshift, foreach, u.a) 
-     - Using Pure Methods (slice, concat, filter, map, reduce u.a)
-     - Freezing Objects, Copying, Spreading, 
-     - Using Lenses (functional getters/setters)
+     => Immutable Data Structures (e.g Immutable.js, ImmerJs)
+     => Lenses (Functional getters/setters)
+     => Freezing, Copying, Spreading
+     => Avoiding Certain Methods (splice, pop, push, shift, unshift, foreach, u.a) 
+     => Using Pure Methods (slice, concat, filter, map, reduce u.a)
+     => Extract and Contain: Write pure Functions and move side Effects "down"
+```
 
-   - Extracting and Containing Impurity
+```md 4,5,6,7 title='Impurity Protection ✞' subtitle='No magic requiered'
+  
+     => Immutable Data Structures (e.g Immutable.js, ImmerJs)
+     => Lenses (Functional getters/setters)
+     => Freezing, Copying, Spreading
+     => Avoiding Certain Methods (splice, pop, push, shift, unshift, foreach, u.a) 
+     => Using Pure Methods (slice, concat, filter, map, reduce u.a)
+     => Extract and Contain: Write pure Functions and move side Effects "down"
 ```
 
 </CodeSurfer>
@@ -140,6 +151,29 @@ const getServerStuff = callback =>         const getServerStuff = ajaxCall
 ---
 
 <CodeSurferColumns>
+
+<Step title="Is this Pure✞™ ?">
+  
+
+```js file=./codesnipets/daysThisMonthImpure.js
+```
+
+```js
+```
+
+</Step>
+
+<Step title="Is this Pure✞™ ?">
+  
+
+```1,2 file=./codesnipets/daysThisMonthImpure.js
+```
+
+```js
+.
+```
+
+</Step>
 
 <Step title="Extract Impurity">
 
