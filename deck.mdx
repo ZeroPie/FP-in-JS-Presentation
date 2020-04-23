@@ -12,13 +12,17 @@ export const theme = vsDark;
 <CodeSurfer>
 
 ```js
-                1. Functions
-                2. Pure Functions
-                3. Side Effects and the case for Purity
-                5. Currying 🍛
-                6. Composition
-                7. Partial Aplication
-                8. Example
+                1. Not all Functions are created equal
+
+                2. Purity✞ and Side Effects
+
+                3. Higher Order Functions
+
+                4. Currying 🍛 and Partial Aplication
+
+                5. Composition
+
+                6. Examples and Questions
 ```
 
 ```markdown title='Functional Programming'
@@ -59,7 +63,7 @@ export const theme = vsDark;
 ```js 7 file=./codesnipets/firstClassFunctions.js title='First Class Functions' subtitle='Stored in objects'
 ```
 
-```js title='Functions are Callable'   
+```js title='Unlike Objects Functions are Callable'   
   const hi = name => `Hi ${name}`
 
   const greet = name => hi(name)
@@ -166,7 +170,19 @@ const getServerStuff = callback =>         const getServerStuff = ajaxCall
 <Step title="Is this Pure✞™ ?">
   
 
-```js 1,2 file=./codesnipets/daysThisMonthImpure.js
+```js file=./codesnipets/daysThisMonthImpure.js
+```
+
+```js
+.
+```
+
+</Step>
+
+<Step title="Is this Pure✞™ ?">
+  
+
+```js 2 file=./codesnipets/daysThisMonthImpure.js
 ```
 
 ```js
@@ -201,7 +217,8 @@ const getServerStuff = callback =>         const getServerStuff = ajaxCall
 ```js 3,8 file=./codesnipets/addCommentImpure.js
 ```
 
-```js 7 file=./codesnipets/nothing.js
+```js
+.
 ```
 
 </Step>
@@ -212,6 +229,7 @@ const getServerStuff = callback =>         const getServerStuff = ajaxCall
 ```
 
 ```js 7,10 file=./codesnipets/addCommentPure.js
+.
 ```
 
 </Step>
@@ -223,7 +241,7 @@ const getServerStuff = callback =>         const getServerStuff = ajaxCall
 
 <CodeSurferColumns sizes={[1,1]}>
 
-<Step title="Flow Statements make a difference" subtitle='Mutation in for Loops'>
+<Step title="Side Effects: Flow Statements" subtitle='Mutation in for Loops'>
 
 ```js file=./codesnipets/doubleItemsForLoop.js
 ```
@@ -233,7 +251,7 @@ const getServerStuff = callback =>         const getServerStuff = ajaxCall
 
 </Step>
 
-<Step title="Methods make a difference">
+<Step title="Side Effects: Methods make a difference">
 
 ```js 6[18:21] file=./codesnipets/doubleItemsForLoopV2.js
 ```
@@ -255,12 +273,12 @@ const getServerStuff = callback =>         const getServerStuff = ajaxCall
 
 </Step>
 
-<Step title="Methods make a Difference" subtitle='Be declarative and use pure methods'>
+<Step title="Alternative" subtitle='Be declarative and use pure✞™ methods'>
 
 ```js 8,14 file=./codesnipets/doubleItemsMutate.js
 ```
 
-```js file=./codesnipets/doubleItemsMap.js
+```js 1[31:34] file=./codesnipets/doubleItemsMap.js
 ```
 
 </Step>
@@ -274,19 +292,19 @@ const getServerStuff = callback =>         const getServerStuff = ajaxCall
 <Step title="Array Methods">
 
 ```js
-splice()
-pop()
-push()
-shift()
-unshift()
+  splice()
+  pop()
+  push()
+  shift()
+  unshift()
 ```
 
 ```js
-slice() 🍕
-concat()
-filter()
-map()
-reduce()
+  slice() 🍕
+  concat()
+  filter()
+  map()
+  reduce()
 ```
 
 </Step>
@@ -851,7 +869,7 @@ const tripleAdd3DivBy5 = compose(divBy5,add2,triple)
 ```
 </Step>
 
-<Step> 
+<Step title='Wait but Why?'> 
 
 ```
 Benefits:
@@ -863,8 +881,16 @@ Benefits:
  - Lazy Evaluation
  - Easier to read (Takes time getting used to it)
 
- example: https://github.com/ZeroPie/changelog
 
+ Little example for this Presentation: https://github.com/ZeroPie/changelog
+
+ - Libraries:
+    https://crocks.dev/
+    https://ramdajs.com/
+    https://github.com/lodash/lodash/wiki/FP-Guide
+
+ - Nice Book:
+    https://github.com/getify/Functional-Light-JS
 ```
 
 </Step>
