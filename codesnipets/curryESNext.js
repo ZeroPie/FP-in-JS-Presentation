@@ -1,10 +1,11 @@
 const arr = [1, 1, 1, 1]
 
-const multiplyBy = (factor, number) => number
-    => factor * number
+const multiply = (num1, num2) 
+    => num2
+    => num1 * num2
 
-const multiplyBy2 = multiplyBy(2)
-const multiplyBy3 = multiplyBy(3)
+const multiplyBy2 = multiply(2)
+const multiplyBy3 = multiply(3)
 
 arr
   .map(multiplyBy2)

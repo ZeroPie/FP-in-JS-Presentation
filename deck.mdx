@@ -239,7 +239,7 @@ const getServerStuff = callback =>         const getServerStuff = ajaxCall
 ```
 
 ```js
-''
+// mutation
 ```
 
 </Step>
@@ -250,7 +250,7 @@ const getServerStuff = callback =>         const getServerStuff = ajaxCall
 ```
 
 ```js
-''
+.
 ```
 
 </Step>
@@ -474,22 +474,28 @@ const newArr = [ -1, 0,...arr]
 <Step title="[].map">
 
 ```js
-Die map() Methode wendet auf jedes Element des Arrays 
-die bereitgestellte Funktion an 
-und gibt das Ergebnis in einem neuen Array zurück.
-
-
-arr.map(x => x * 2)
+Map applies a function to each element in the Array
+and returns a new Array
 ```
 
 ```js
+arr.map(x => x * 2)
 ```
 
 </Step>
 
-<Step>
+<Step title='For Loop vs Map'>
 
-```js file=./codesnipets/doubleItemsForLoop.js
+```js
+
+function doubleItems(arr) {
+  let doubledItems = [];
+  for (let i = 0; i < arr.length; i++) {
+    doubledItems.push(arr[i] * 2)
+  }
+  return doubledItems
+}
+
 ```
 
 ```js
@@ -499,6 +505,44 @@ const doubled = arr.map(doubleNumber)
 
 </Step>
 
+</CodeSurferColumns>
+
+---
+
+<CodeSurferColumns sizes={[1,1]}>
+
+<Step title="Higher Order Functions" subtitle="">
+
+```js
+  Functions that operate on other functions. 
+  either by taking them as arguments or by returning them.
+```
+
+```js
+   map(fn)
+```
+
+</Step>
+
+<Step title="Higher Order Functions" subtitle="">
+
+```js
+   const addFactory = (x, y) => y => x + y
+   const add5 = addFactory(5)
+   add5(5) 
+```
+
+```js
+  var addFactory = function addFactory(x, y) {
+    return function (y) {
+    return x + y;
+    };
+  };
+  var add5 = addFactory(5);
+  add5(5);
+```
+
+</Step>
 
 </CodeSurferColumns>
 
@@ -506,29 +550,31 @@ const doubled = arr.map(doubleNumber)
 
 <CodeSurferColumns>
 
-<Step title="Currying 🍛" subtitle="Von Multiple Arguments zu eine Funktion die weniger arguments animmt">
+<Step title="Currying 🍛" subtitle="Multiple Arguments to a function that takes in less arguments">
 
-``` js 3,4 file=./codesnipets/curryESNext.js
+```js
+.
 ```
 
-```js 5,6 file=./codesnipets/curryES15.js
+```js 
+.
 ```
 
 </Step>
 
 <Step title="Currying 🍛">
 
-``` js 4 file=./codesnipets/curryESNext.js
+```js 3 file=./codesnipets/curryESNext.js subtitle='2 params'
 ```
 
-```js 4 file=./codesnipets/curryES15.js
+```js 3 file=./codesnipets/curryES15.js subtitle='2 params'
 ```
 
 </Step>
 
-<Step title="Currying 🍛" subtitle='Partial Application'>
+<Step title="Currying 🍛" subtitle='If you call me with one it is fine (Partial Application)'>
 
-``` js 7 file=./codesnipets/curryESNext.js
+```js 7 file=./codesnipets/curryESNext.js 
 ```
 
 ```js 9 file=./codesnipets/curryES15.js
@@ -536,7 +582,27 @@ const doubled = arr.map(doubleNumber)
 
 </Step>
 
-<Step title="Currying 🍛" subtitle='Partial Application'>
+<Step title="Currying 🍛" subtitle='You get a function back'>
+
+```js 4,5,7 file=./codesnipets/curryESNext.js
+```
+
+```js 4,5,9 file=./codesnipets/curryES15.js
+```
+
+</Step>
+
+<Step title="Currying 🍛" subtitle='Another Partial Application'>
+
+```js 8 file=./codesnipets/curryESNext.js
+```
+
+```js 10 file=./codesnipets/curryES15.js
+```
+
+</Step>
+
+<Step title="Currying 🍛" subtitle=''>
 
 ``` js 8 file=./codesnipets/curryESNext.js
 ```
@@ -546,17 +612,7 @@ const doubled = arr.map(doubleNumber)
 
 </Step>
 
-<Step title="Currying 🍛" subtitle='Partial Application'>
-
-``` js 8 file=./codesnipets/curryESNext.js
-```
-
-```js 10 file=./codesnipets/curryES15.js
-```
-
-</Step>
-
-<Step title="Currying 🍛" subtitle='Partial Application'>
+<Step title="Currying 🍛" subtitle='Pass me around'>
 
 ``` js 10:12 file=./codesnipets/curryESNext.js
 ```
@@ -566,7 +622,88 @@ const doubled = arr.map(doubleNumber)
 
 </Step>
 
-<Step title="Composition 🍛" subtitle="Output einer Function als Input einer anderen nehmen">
+<Step title="Currying 🍛" subtitle='Can now be called like this'>
+
+``` js
+  const multiply = (num1, num2) 
+    => num2
+    => num1 * num2
+```
+
+```js 
+  multiply(2)(2)
+  
+  multiply(2, 2)
+```
+
+</Step>
+
+<Step title="HOCS and Curry">
+
+```js
+  <button id="pay" onclick="once(charge)(data)">
+      Pay
+  </button>
+```
+
+```js file=./codesnipets/once.js
+```
+
+</Step>
+
+<Step title="HOCS">
+
+```js
+  <button id="pay" onclick="once(charge)(data)">
+      Pay
+  </button>
+```
+
+```js 1 file=./codesnipets/once.js subtitle='Function as Argument'
+```
+
+</Step>
+
+<Step title="HOCS">
+
+```js
+  <button id="pay" onclick="once(charge)(data)">
+      Pay
+  </button>
+```
+
+```js 2 file=./codesnipets/once.js subtitle='Private State in Closure'
+```
+
+</Step>
+
+<Step title="HOCS">
+
+```js
+  <button id="pay" onclick="once(charge)(data)">
+      Pay
+  </button>
+```
+
+```js 3 file=./codesnipets/once.js subtitle='Return a function with as many params as it had (0 - inf)'
+```
+
+</Step>
+
+<Step title="HOCS">
+
+```js
+  <button id="pay" onclick="once(charge)(data)">
+      Pay
+  </button>
+```
+
+```js 5,6 file=./codesnipets/once.js subtitle='We have set the state, now we can call the function'
+```
+
+</Step>
+
+<Step title="Composition 🎼" subtitle="My input is your output">
 
 ```js 2
 const doubleAndTriple = x 
